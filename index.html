@@ -11,6 +11,7 @@
         <script src="sentences.js"></script>
         <script src="associations.js"></script>
         <script src="priming.js"></script>
+        <script src="use.js"></script>
         <script src="https://unpkg.com/@jspsych/plugin-iat-html@1.1.2"></script>
 
     
@@ -96,7 +97,19 @@
             response_ends_trial: true
 
        }
+       var use = {
+        type:jsPsychSurveyText,
+        questions:[{prompt: jsPsych.timelineVariable('cue')}],
+       }
+       var use_procedure= {
+        timeline: [use],
+        timeline_variables: use_cues,
+        randomize_order: true,
+        repetitions: 3
 
-        jsPsych.run([iat]);
+        
+       }
+
+        jsPsych.run([use_procedure]);
     </script>
 </html>
