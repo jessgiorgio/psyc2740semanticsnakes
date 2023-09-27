@@ -13,7 +13,7 @@
         <script src="priming.js"></script>
         <script src="use.js"></script>
         <script src="https://unpkg.com/@jspsych/plugin-iat-html@1.1.2"></script>
-
+        <script src="valence_training.js"></script>
     
     </head>
     <body></body>
@@ -81,9 +81,11 @@
             prompt:"<span style= 'font-size:170%'>apple<br><br></span>"
         
         }
-       var iat = {
+        
+
+       var iat_valence_training  = {
             type: jsPsychIatHtml,
-            stimulus: 'foobly',
+            stimulus:jsPsych.timelineVariable('cue'),
             stim_key_association:'left',
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
@@ -92,11 +94,26 @@
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['NOVEL','GOOD'],
-            right_category_label: ['RANDOM WORD','BAD'],
-            response_ends_trial: true
-
+            left_category_label: ['GOOD'],
+            right_category_label: ['BAD'],
+            //response_ends_trial: true
+            repetitions: 10,
+            randomize_order: true
+        
+    
        }
+
+       var iat_valence_procedure = {
+            timeline:[valence_training],
+            timeline_variables: valence_cues, 
+            randomize_order: true, 
+            repetitions: 10, }
+
+        var valence_training = {
+            type: jsPsychIatHtml,
+            questions: [{prompt: jsPsych.timelineVariable('cue')}],
+        }
+
        var use = {
         type:jsPsychSurveyText,
         questions:[{prompt: jsPsych.timelineVariable('cue')}],
@@ -110,6 +127,6 @@
         
        }
 
-        jsPsych.run([use_procedure]);
+        jsPsych.run([iat_valence_training]);
     </script>
 </html>
