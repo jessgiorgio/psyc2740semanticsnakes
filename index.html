@@ -80,22 +80,23 @@
             prompt:"<span style= 'font-size:170%'>apple<br><br></span>"
         
         }
-        var iat = {
+       var iat = {
             type: jsPsychIatHtml,
             stimulus: 'foobly',
-            stim_key_association: 'left',
-            html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+            stim_key_association:'left',
+            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
             force_correct_key_press: true,
             display_feedback: true,
-            trial_duration: 3000, //Only if display_feedback is false
+            trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
             left_category_label: ['NOVEL','GOOD'],
             right_category_label: ['RANDOM WORD','BAD'],
             response_ends_trial: true
 
-        }
+       }
+
         jsPsych.run([iat]);
     </script>
 </html>
