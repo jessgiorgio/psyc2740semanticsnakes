@@ -83,35 +83,35 @@
         }
         
 
+
+
        var iat_valence_training  = {
             type: jsPsychIatHtml,
-            stimulus:jsPsych.timelineVariable('cue'),
-            //stim_key_association:'left',
+            stimulus:jsPsych.timelineVariable("cue"),
+            stim_key_association: 'left',
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
-            //force_correct_key_press: true,
-            //display_feedback: true,
+            force_correct_key_press: true,
+            display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
             left_category_label: ['GOOD'],
             right_category_label: ['BAD'],
-            //response_ends_trial: true
+            response_ends_trial: true
             
         
     
-       }
+      }
 
-       var iat_valence_procedure = {
-            timeline:[valence_training],
+       var iat_valence_procedure = { 
+            timeline:[iat_valence_training],
             timeline_variables: valence_cues, 
             randomize_order: true, 
             repetitions: 10, }
 
-        var valence_training = {
-            type: jsPsychIatHtml,
-            questions: [{prompt: jsPsych.timelineVariable('cue')}],
-        }
+    
+   
 
        var use = {
         type:jsPsychSurveyText,
@@ -126,6 +126,8 @@
         
        }
 
-        jsPsych.run([iat_valence_training]);
+       
+
+        jsPsych.run([use_procedure]);
     </script>
 </html>
