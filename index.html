@@ -14,6 +14,9 @@
         <script src="use.js"></script>
         <script src="https://unpkg.com/@jspsych/plugin-iat-html@1.1.2"></script>
         <script src="valence_training.js"></script>
+        <script src="novel.js"></script>
+        <script src="congruent.js"></script>
+        <script src="incongruent.js"></script>
     
     </head>
     <body></body>
@@ -110,6 +113,78 @@
             randomize_order: true, 
             repetitions: 10, }
 
+        var iat_novel_training  = {
+            type: jsPsychIatHtml,
+            stimulus:jsPsych.timelineVariable("cue"),
+            stim_key_association: 'left',
+            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
+            bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+            force_correct_key_press: true,
+            display_feedback: true,
+            trial_duration: 3000, //Only if display_feedback is false,
+            left_category_key: 'A',
+            right_category_key: 'L',
+            left_category_label: ['NOVEL WORDS'],
+            right_category_label: ['RANDOM WORDS'],
+            response_ends_trial: true
+            
+    
+      }
+
+       var iat_novel_procedure = { 
+            timeline:[iat_novel_training],
+            timeline_variables: novel_cues, 
+            randomize_order: true, 
+            repetitions: 10, }
+
+        var iat_congruent_training  = {
+            type: jsPsychIatHtml,
+            stimulus:jsPsych.timelineVariable("cue"),
+            stim_key_association: 'left',
+            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
+            bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+            force_correct_key_press: true,
+            display_feedback: true,
+            trial_duration: 3000, //Only if display_feedback is false,
+            left_category_key: 'A',
+            right_category_key: 'L',
+            left_category_label: ['NOVEL WORDS', 'GOOD'],
+            right_category_label: ['RANDOM WORDS', 'BAD'],
+            response_ends_trial: true
+            
+    
+      }
+
+       var iat_congruent_procedure = { 
+            timeline:[iat_congruent_training],
+            timeline_variables: congruent_cues, 
+            randomize_order: true, 
+            repetitions: 10, }
+
+        var iat_incongruent_training  = {
+            type: jsPsychIatHtml,
+            stimulus:jsPsych.timelineVariable("cue"),
+            stim_key_association: 'left',
+            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
+            bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+            force_correct_key_press: true,
+            display_feedback: true,
+            trial_duration: 3000, //Only if display_feedback is false,
+            left_category_key: 'A',
+            right_category_key: 'L',
+            left_category_label: ['NOVEL WORDS', 'BAD'],
+            right_category_label: ['RANDOM WORDS', 'GOOD'],
+            response_ends_trial: true
+            
+    
+      }
+
+       var iat_incongruent_procedure = { 
+            timeline:[iat_incongruent_training],
+            timeline_variables: incongruent_cues, 
+            randomize_order: true, 
+            repetitions: 10, }
+    
     
    
 
@@ -128,6 +203,6 @@
 
        
 
-        jsPsych.run([use_procedure]);
+        jsPsych.run([iat_incongruent_procedure]);
     </script>
 </html>

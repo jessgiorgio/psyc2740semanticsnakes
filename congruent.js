@@ -1,4 +1,12 @@
-var valence_cues = [
+var congruent_cues = [
+    {"cue": "foobly"},
+
+    {"cue": "mipp"},
+    
+    {"cue": "dodish"},
+
+    {"cue": "geck"},
+
     {"cue": "sweet"},
     {"cue": "friendly"},
     {"cue": "interesting"},
@@ -9,7 +17,5 @@ var valence_cues = [
     {"cue": "boring"},
     {"cue": "mean"},
     {"cue": "uncomfortable"},
-
-
 
 ]
