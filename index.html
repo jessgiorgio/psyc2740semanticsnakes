@@ -26,16 +26,16 @@
          var initial_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'page 1 instructions',
-                'page 2 instructions',
-                'page 3 instructions.'
+                'Hello, welcome to the experiment.',
+                'Today you will be completing a series of exercises related to cognition.',
+                'In the first task, you will read sentences with novel words. You will be occasionally presented attention checks. Once you read each sentence, press spacebar to continue.'
             ],
             show_clickable_nav: true
          }
          var association_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Done with sentences. Association time.'
+                'The sentence reading activity is complete. Now is time for our next task. Write the first word that comes to mind when presented with the stimuli.'
             ],
             show_clickable_nav: true
          }
@@ -43,7 +43,7 @@
          var priming_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Priming task about to begin.'
+                'You will be presented with two words. Match the second word to match to the visual stimuli of either a horse or apple, using the keys A and L. (A = left and L = right).'
             ],
             show_clickable_nav: true
          }
@@ -57,7 +57,7 @@
             trial_duration: 10,
             on_finish: function(data) {
                 sentence_number = (sentence_number +1) % 40
-                console.log("sentence_number = " + sentence_number)
+                console.log("sentence_number= " + sentence_number)
             }
     }
 
@@ -165,16 +165,24 @@
         timeline_variables: practice_stimuli,
         randomize_order: true
         }
-        
+    
+        var iat_valence_instructions = { 
+            type: jsPsychInstructions,
+            pages: [
+                'Next, you will complete an association task.',
+                'When a word appears in the center of your screen, click the key “A” if it is a good word and “L” if it is a bad word.'
+            ],
+            show_clickable_nav: true }
 
        var iat_valence_training  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
-            stim_key_association: 'left',
+            key_to_move_forward: "ALL_KEYS",
+            stim_key_association: 'left, right',
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
-            force_correct_key_press: true,
-            display_feedback: true,
+           // force_correct_key_press: true,
+           // display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
@@ -192,14 +200,23 @@
             randomize_order: true, 
             repetitions: 10, }
 
+         var iat_novel_instructions = { 
+            type: jsPsychInstructions,
+            pages: [
+                'In the next section, you will differentiate between the made-up words you saw earlier in the experiment, and random words.',
+                ' If the word in the center of the screen is one of the familiar made-up words from earlier, press “A”. If it is a random word you have not seen before, press “L"'
+            ],
+            show_clickable_nav: true }
+
         var iat_novel_training  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
+            key_to_move_forward: "ALL_KEYS",
             stim_key_association: 'left',
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
-            force_correct_key_press: true,
-            display_feedback: true,
+            //force_correct_key_press: true,
+            //display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
@@ -216,14 +233,22 @@
             randomize_order: true, 
             repetitions: 10, }
 
+        var iat_congruent_instructions = { 
+            type: jsPsychInstructions,
+            pages: [
+                'Now, you will differentiate between both good and bad words, and familiar made-up words and random words.',
+                'If the word is either good OR familiar made-up, press “A”. If it is either bad OR random, press “L”.' ],
+            show_clickable_nav: true }
+
         var iat_congruent_training  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
+            key_to_move_forward: "ALL_KEYS",
             stim_key_association: 'left',
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
-            force_correct_key_press: true,
-            display_feedback: true,
+            //force_correct_key_press: true,
+            //display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
@@ -240,14 +265,22 @@
             randomize_order: true, 
             repetitions: 10, }
 
+        var iat_incongruent_instructions = { 
+            type: jsPsychInstructions,
+            pages: [
+                'If the word is either good OR random, press “A”. If it is either bad OR familiar made-up, press “L”.'
+            ],
+            show_clickable_nav: true }
+
         var iat_incongruent_training  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
-            stim_key_association: 'left',
+            key_to_move_forward: "ALL_KEYS",
+            stim_key_association: 'left' ,
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
-            force_correct_key_press: true,
-            display_feedback: true,
+            //force_correct_key_press: true,
+            //display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
@@ -264,7 +297,12 @@
             randomize_order: true, 
             repetitions: 10, }
     
-    
+        var use_instructions = { 
+            type: jsPsychInstructions,
+            pages: [
+                'Next you will write a few sentences using the novel words.'
+            ],
+            show_clickable_nav: true }
    
 
        var use = {
@@ -281,10 +319,6 @@
        }
 
 
-<<<<<<< HEAD
-        jsPsych.run([iat_incongruent_procedure]);
-=======
-        jsPsych.run([iat_valence_procedure, iat_incongruent_procedure,iat_congruent_procedure]);
->>>>>>> 9c4ad13624bac365c8ecfa19a38691e334e1d7ec
+       jsPsych.run([initial_instructions, sentence, random_attention_trials, attention, attention_conditional, association_instructions, association_procedure, priming_instructions, priming_proc, fixation, image, prime, slow_experiment_trial, priming_feedback, iat_valence_training, iat_valence_procedure, iat_novel_training, iat_novel_procedure, iat_congruent_training, iat_congruent_procedure, iat_incongruent_training, iat_incongruent_procedure, use]);
     </script>
 </html>
