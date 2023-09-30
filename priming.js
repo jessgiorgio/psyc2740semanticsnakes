@@ -1,4 +1,4 @@
-[
+var practice_stimuli = [
   {
     "block_number": "practice",
     "triad": 1,
@@ -102,7 +102,9 @@
     "correct_response": 3,
     "image_path": "horseapple.png",
     "correct_key": "L"
-  },
+  }, ]
+
+  var test_stimuli = [
   {
     "block_number": 1,
     "triad": 1,
