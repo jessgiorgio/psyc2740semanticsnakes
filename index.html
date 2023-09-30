@@ -11,6 +11,7 @@
         <script src="sentences.js"></script>
         <script src="associations.js"></script>
         <script src="priming.js"></script>
+<<<<<<< Updated upstream
         <script src="use.js"></script>
         <script src="https://unpkg.com/@jspsych/plugin-iat-html@1.1.2"></script>
         <script src="valence_training.js"></script>
@@ -18,6 +19,9 @@
         <script src="congruent.js"></script>
         <script src="incongruent.js"></script>
     
+=======
+        <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
+>>>>>>> Stashed changes
     </head>
     <body></body>
     <script>
@@ -84,6 +88,7 @@
             prompt:"<span style= 'font-size:170%'>apple<br><br></span>"
         
         }
+<<<<<<< Updated upstream
         
 
 
@@ -204,5 +209,17 @@
        
 
         jsPsych.run([iat_incongruent_procedure]);
+=======
+        var sentence_novel_word={
+            type:jsPsychSurveyText,
+            preamble:jsPsych.timelineVariable("Respond with a sentence using the word below"),
+            questions:jsPsych.timelineVariable(''),
+            randomize_question_order:true,
+            button_label:'Continue',            
+        }
+
+
+        jsPsych.run([sentence_novel_word]);
+>>>>>>> Stashed changes
     </script>
 </html>
