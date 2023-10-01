@@ -54,7 +54,7 @@
             type: jsPsychHtmlKeyboardResponse,
             stimulus: jsPsych.timelineVariable('sentence'),
             choices: [' '],
-            trial_duration: 10,
+            //trial_duration: 500,
             on_finish: function(data) {
                 sentence_number = (sentence_number +1) % 40
                 console.log("sentence_number= " + sentence_number)
@@ -178,12 +178,12 @@
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
-            stim_key_association: 'left, right',
+            stim_key_association: 'left',
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
            // force_correct_key_press: true,
            // display_feedback: true,
-            trial_duration: 3000, //Only if display_feedback is false,
+            //trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
             left_category_label: ['GOOD'],
@@ -319,6 +319,7 @@
        }
 
 
-       jsPsych.run([initial_instructions, sentence, random_attention_trials, attention, attention_conditional, association_instructions, association_procedure, priming_instructions, priming_proc, fixation, image, prime, slow_experiment_trial, priming_feedback, iat_valence_training, iat_valence_procedure, iat_novel_training, iat_novel_procedure, iat_congruent_training, iat_congruent_procedure, iat_incongruent_training, iat_incongruent_procedure, use_procedure]);
+       jsPsych.run([initial_instructions, training_plus_association, priming_instructions, priming_proc, iat_valence_instructions, iat_valence_procedure, iat_novel_instructions, iat_novel_procedure, iat_congruent_instructions, iat_congruent_procedure, iat_incongruent_instructions, iat_incongruent_procedure, use_instructions, use_procedure
+]);
     </script>
 </html>
