@@ -188,7 +188,10 @@
             right_category_key: 'L',
             left_category_label: ['GOOD'],
             right_category_label: ['BAD'],
-            response_ends_trial: true
+            response_ends_trial: true,
+            data: {
+                correct_key: jsPsych.timelineVariable('correct_key'),
+            }
             
         
     
@@ -222,7 +225,8 @@
             right_category_key: 'L',
             left_category_label: ['NOVEL WORDS'],
             right_category_label: ['RANDOM WORDS'],
-            response_ends_trial: true
+            response_ends_trial: true,
+           
             
     
       }
@@ -319,7 +323,6 @@
        }
 
 
-       jsPsych.run([initial_instructions, training_plus_association, priming_instructions, priming_proc, iat_valence_instructions, iat_valence_procedure, iat_novel_instructions, iat_novel_procedure, iat_congruent_instructions, iat_congruent_procedure, iat_incongruent_instructions, iat_incongruent_procedure, use_instructions, use_procedure
-]);
+       jsPsych.run([iat_valence_procedure]);
     </script>
 </html>
