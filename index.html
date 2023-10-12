@@ -121,7 +121,10 @@
             right_category_key: 'L',
             left_category_label: ['GOOD'],
             right_category_label: ['BAD'],
-            response_ends_trial: true
+            response_ends_trial: true,
+            data: {
+                correct_key: jsPsych.timelineVariable('correct_key'),
+            }
             
         
     
@@ -155,7 +158,8 @@
             right_category_key: 'L',
             left_category_label: ['NOVEL WORDS'],
             right_category_label: ['RANDOM WORDS'],
-            response_ends_trial: true
+            response_ends_trial: true,
+           
             
     
       }
