@@ -10,6 +10,14 @@ var use_cues =[
     },
     {
         cue: "Write a sentence using the word <br><b>geck</b>"
-    }
+    },
+
+    { cue: "Write a sentence using the word <br><b>tree</b>"},
+
+    { cue: "Write a sentence using the word <br><b>cat</b>"},
+
+    { cue: "Write a sentence using the word <br><b>car</b>"}
+
+    
 
 ]

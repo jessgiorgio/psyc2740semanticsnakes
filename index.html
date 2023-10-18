@@ -139,8 +139,8 @@
          var iat_novel_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'In the next section, you will differentiate between the made-up words you saw earlier in the experiment, and random words.',
-                ' If the word in the center of the screen is one of the familiar made-up words from earlier, press “A”. If it is a random word you have not seen before, press “L"'
+                'In the next section, you will differentiate between the familiar pseudowords you saw earlier in the experiment, and random pseudowords.',
+                ' If the word in the center of the screen is one of the familiar pseudowords previously seen in the experiment, press “A”. If it is a random pseudoword you have not seen before, press “L"'
             ],
             show_clickable_nav: true }
 
@@ -156,8 +156,8 @@
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['NOVEL WORDS'],
-            right_category_label: ['RANDOM WORDS'],
+            left_category_label: ['FAMILIAR PSEUDOWORDS'],
+            right_category_label: ['RANDOM PSEUDOWORDS'],
             response_ends_trial: true,
            
             
@@ -173,8 +173,8 @@
         var iat_congruent_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Now, you will differentiate between both good and bad words, and familiar made-up words and random words.',
-                'If the word is either good OR familiar made-up, press “A”. If it is either bad OR random, press “L”.' ],
+                'Now, you will differentiate between both good and bad words, and familiar pseudowords (made-up words included in the experiment) and random pseudowords (unfamiliar made-up words).',
+                'If the word is either good OR a familiar pseudoword, press “A”. If it is either bad OR random pseudoword, press “L”.' ],
             show_clickable_nav: true }
 
         var iat_congruent_training  = {
@@ -182,15 +182,15 @@
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
             stim_key_association: jsPsych.timelineVariable ("correct_key"),
-            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+            //html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
+            //bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
             //force_correct_key_press: true,
             //display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['NOVEL WORDS', 'GOOD'],
-            right_category_label: ['RANDOM WORDS', 'BAD'],
+            left_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
+            right_category_label: ['RANDOM PSEUDOWORDS', 'BAD'],
             response_ends_trial: true
             
     
@@ -205,7 +205,7 @@
         var iat_incongruent_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'If the word is either good OR random, press “A”. If it is either bad OR familiar made-up, press “L”.'
+                'If the word is either good OR random psuedoword (an unfamiliar made-up word), press “A”. If it is either bad OR familiar pseudoword (a made-up word included in the experiment), press “L”.'
             ],
             show_clickable_nav: true }
 
@@ -214,15 +214,15 @@
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
             stim_key_association: jsPsych.timelineVariable ("correct_key"),
-            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+            //html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
+            //bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
             //force_correct_key_press: true,
             //display_feedback: true,
             trial_duration: 2000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['NOVEL WORDS', 'BAD'],
-            right_category_label: ['RANDOM WORDS', 'GOOD'],
+            left_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
+            right_category_label: ['RANDOM PSEUDOWORDS', 'GOOD'],
             response_ends_trial: true
             
     
@@ -237,7 +237,7 @@
         var use_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Next you will write a few sentences using the novel words.'
+                'Next you will write a few sentences using specifc words.'
             ],
             show_clickable_nav: true }
    
