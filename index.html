@@ -111,7 +111,7 @@
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
-            stim_key_association: 'left',
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
            // force_correct_key_press: true,
@@ -147,8 +147,8 @@
         var iat_novel_training  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
-            key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVarible ("correct_key"),
+            key_to_move_forward: ['A', 'L'],
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
             force_correct_key_press: true,
@@ -181,7 +181,7 @@
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
-            stim_key_association: 'left',
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
             //force_correct_key_press: true,
@@ -213,12 +213,12 @@
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
-            stim_key_association: 'left' ,
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
             //force_correct_key_press: true,
             //display_feedback: true,
-            trial_duration: 3000, //Only if display_feedback is false,
+            trial_duration: 2000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
             left_category_label: ['NOVEL WORDS', 'BAD'],
@@ -256,7 +256,7 @@
        }
 
 
-       jsPsych.run([iat_novel_procedure
+       jsPsych.run([initial_instructions, training_plus_association, iat_valence_instructions, iat_valence_procedure, iat_novel_instructions, iat_novel_procedure, iat_congruent_instructions, iat_congruent_procedure, iat_incongruent_instructions, iat_incongruent_procedure, use_instructions, use_procedure
 ]);
     </script>
 </html>

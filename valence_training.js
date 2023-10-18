@@ -1,43 +1,43 @@
 var valence_cues = [
     {
     "cue": "sweet",
-    "correct_key": "A"
+    "correct_key": "left"
 },
     {
     "cue": "friendly",
-    "correct_key": "A"
+    "correct_key": "left"
 },
     {
     "cue": "interesting",
-    "correct_key": "A"
+    "correct_key": "left"
 },
     {
     "cue": "honest",
-    "correct_key": "A"
+    "correct_key": "left"
 },
     {
     "cue": "funny",
-    "correct_key": "A"
+    "correct_key": "left"
 },
     {
     "cue": "selfish",
-    "correct_key": "L"
+    "correct_key": "right"
 },
     {
     "cue": "cruel",
-    "correct_key": "L"
+    "correct_key": "right"
 },
     {
     "cue": "boring",
-    "correct_key": "L"
+    "correct_key": "right"
 },
     {
     "cue": "mean",
-    "correct_key": "L"
+    "correct_key": "right"
 },
     {
     "cue": "uncomfortable",
-    "correct_key": "L"
+    "correct_key": "right"
 },
 
 

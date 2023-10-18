@@ -1,20 +1,63 @@
 var incongruent_cues = [
-    {"cue": "foobly"},
+    { "cue": "sweet",
+    "correct_key": "right"
+},
+    {
+    "cue": "friendly",
+    "correct_key": "right"
+},
+    {
+    "cue": "interesting",
+    "correct_key": "right"
+},
+    {
+    "cue": "honest",
+    "correct_key": "right"
+},
+    {
+    "cue": "funny",
+    "correct_key": "right"
+},
+    {
+    "cue": "selfish",
+    "correct_key": "left"
+},
+    {
+    "cue": "cruel",
+    "correct_key": "left"
+},
+    {
+    "cue": "boring",
+    "correct_key": "left"
+},
+    {
+    "cue": "mean",
+    "correct_key": "left"
+},
+    {
+    "cue": "uncomfortable",
+    "correct_key": "left" },
 
-    {"cue": "mipp"},
-    
-    {"cue": "dodish"},
+    {"cue": "foobly",
+"correct_key": "left"},
 
-    {"cue": "geck"},
+{"cue": "mipp",
+"correct_key": "left"},
 
-    {"cue": "sweet"},
-    {"cue": "friendly"},
-    {"cue": "interesting"},
-    {"cue": "honest"},
-    {"cue": "funny"},
-    {"cue": "selfish"},
-    {"cue": "cruel"},
-    {"cue": "boring"},
-    {"cue": "mean"},
-    {"cue": "uncomfortable"},
-]
+{"cue": "dodish",
+"correct_key": "left"},
+
+{"cue": "geck",
+"correct_key": "left"},
+
+{"cue": "hepp",
+"correct_key": "right"},
+
+{"cue": "pimm",
+"correct_key": "right"},
+
+{"cue": "kiff",
+"correct_key": "right"},
+
+{"cue": "wibb",
+"correct_key": "right"} ]
