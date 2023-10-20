@@ -22,20 +22,23 @@
     </head>
     <body></body>
     <script>
-        const jsPsych = initJsPsych () ;
+        const jsPsych = initJsPsych ({on_finish: function(data){
+
+        jsPsych.data.displayData();
+}}) ;
          var initial_instructions = { 
             type: jsPsychInstructions,
             pages: [
                 'Hello, welcome to the experiment.',
                 'Today you will be completing a series of exercises related to cognition.',
-                'In the first task, you will read sentences with novel words. You will be occasionally presented attention checks. Once you read each sentence, press spacebar to continue.'
+                'In the first task, you will read sentences with novel words. You will be occasionally presented with attention checks. Once you read each sentence, press spacebar to continue.'
             ],
             show_clickable_nav: true
          }
          var association_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'The sentence reading activity is complete. Now is time for our next task. Write the first word that comes to mind when presented with the stimuli.'
+                'That section of the sentence reading activity is complete. Now is time for our next task. Write the first word that comes to mind when presented with the stimuli.'
             ],
             show_clickable_nav: true
          }
@@ -122,19 +125,18 @@
             left_category_label: ['GOOD'],
             right_category_label: ['BAD'],
             response_ends_trial: true,
-            data: {
-                correct_key: jsPsych.timelineVariable('correct_key'),
-            }
+            
+            
+    }
             
         
-    
-      }
+
 
        var iat_valence_procedure = { 
             timeline:[iat_valence_training],
             timeline_variables: valence_cues, 
             randomize_order: true, 
-            repetitions: 10, }
+            repetitions: 2, }
 
          var iat_novel_instructions = { 
             type: jsPsychInstructions,
@@ -168,13 +170,13 @@
             timeline:[iat_novel_training],
             timeline_variables: novel_cues, 
             randomize_order: true, 
-            repetitions: 10, }
+            repetitions: 2, }
 
         var iat_congruent_instructions = { 
             type: jsPsychInstructions,
             pages: [
                 'Now, you will differentiate between both good and bad words, and familiar pseudowords (made-up words included in the experiment) and random pseudowords (unfamiliar made-up words).',
-                'If the word is either good OR a familiar pseudoword, press “A”. If it is either bad OR random pseudoword, press “L”.' ],
+                'If the word is either good OR a familiar pseudoword, press “A”. If it is either bad OR a random pseudoword, press “L”.' ],
             show_clickable_nav: true }
 
         var iat_congruent_training  = {
@@ -200,7 +202,7 @@
             timeline:[iat_congruent_training],
             timeline_variables: congruent_cues, 
             randomize_order: true, 
-            repetitions: 10, }
+            repetitions: 3, }
 
         var iat_incongruent_instructions = { 
             type: jsPsychInstructions,
@@ -232,7 +234,7 @@
             timeline:[iat_incongruent_training],
             timeline_variables: incongruent_cues, 
             randomize_order: true, 
-            repetitions: 10, }
+            repetitions: 3, }
     
         var use_instructions = { 
             type: jsPsychInstructions,
