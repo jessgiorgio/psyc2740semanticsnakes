@@ -18,6 +18,7 @@
         <script src="novel.js"></script>
         <script src="congruent.js"></script>
         <script src="incongruent.js"></script>
+        <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.3"></script>
     
     </head>
     <body></body>
@@ -26,6 +27,14 @@
 
         jsPsych.data.displayData();
 }}) ;
+       
+         var id = Math.floor(Math.random () * 10000000000);
+         console.log("id =", id)
+
+         jsPsych.data.addProperties({
+            ID: id
+         })
+
          var initial_instructions = { 
             type: jsPsychInstructions,
             pages: [
@@ -33,15 +42,20 @@
                 'Today you will be completing a series of exercises related to cognition.',
                 'In the first task, you will read sentences with novel words. You will be occasionally presented with attention checks. Once you read each sentence, press spacebar to continue.'
             ],
-            show_clickable_nav: true
-         }
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'
+         } }
+
          var association_instructions = { 
             type: jsPsychInstructions,
             pages: [
                 'That section of the sentence reading activity is complete. Now is time for our next task. Write the first word that comes to mind when presented with the stimuli.'
             ],
-            show_clickable_nav: true
-         }
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'
+         } }
 
 
          var sentence_number= 0
@@ -54,8 +68,14 @@
             on_finish: function(data) {
                 sentence_number = (sentence_number +1) % 40
                 console.log("sentence_number= " + sentence_number)
-            }
-    }
+            }, 
+            data: {
+                typeoftrial: 'sentence',
+                sentence:jsPsych.timelineVariable('sentence'),
+                novel1:jsPsych.timelineVariable('novel1'),
+                novel2:jsPsych.timelineVariable('novel2'),
+                novel3:jsPsych.timelineVariable('novel3')
+    } }
 
     var random_attention_trials = jsPsych.randomization.sampleWithoutReplacement([...Array(35).keys()].map(x=> x+5), 3)
 
@@ -63,8 +83,33 @@
 
     var attention = {
         type:jsPsychSurveyText,
-        questions: [{prompt: "Type any ONE novel word from the previous sentence:"} ]
-    }
+        questions: [{prompt: "Type any ONE novel word from the previous sentence:"} ],
+        data: {
+                typeoftrial: 'attention',
+    },
+    on_finish: function(data) {
+        var last_trial_data = jsPsych.data.get().filter({typeoftrial:'sentence'}).last(1).values() [0];
+        console.log("last_trial_data = ", last_trial_data);
+
+        data.novel1 = last_trial_data.novel1;
+        data.novel2 = last_trial_data.novel2;
+        data.novel3 = last_trial_data.novel3;
+        data.response = data.response.Q0;
+
+        if (
+            jsPsych.pluginAPI.compareKeys(data.response, data.novel1) ||
+            jsPsych.pluginAPI.compareKeys(data.response, data.novel2) ||
+            jsPsych.pluginAPI.compareKeys(data.response, data.novel3)  ) 
+             {
+            data.correct = 1;
+            console.log("correct = " + data.correct);
+        } else {
+            data.correct = 0;
+            console.log("correct = " + data.correct)
+        }
+        }
+    } 
+    
 
     var attention_conditional = {
         timeline: [attention],
@@ -81,8 +126,17 @@
 
     var association = {
         type:jsPsychSurveyText,
+        preamble: 'Type in the first word that comes to mind when you see the word below:',
         questions: [{prompt: jsPsych.timelineVariable('cue')}],
-    }
+        trial_duration: 10, 
+        data: {
+                typeoftrial: 'association',
+                cue: jsPsych.timelineVariable('cue') },
+                on_finish: function(data){
+                    data.response = data.response.Q0
+                }
+
+    } 
 
     var association_procedure = {
         timeline: [association],
@@ -97,18 +151,15 @@
         repetitions: 3
     }
 
-
-    
-
-
-    
         var iat_valence_instructions = { 
             type: jsPsychInstructions,
             pages: [
                 'Next, you will complete an association task.',
                 'When a word appears in the center of your screen, click the key “A” if it is a good word and “L” if it is a bad word.'
             ],
-            show_clickable_nav: true }
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'} }
 
        var iat_valence_training  = {
             type: jsPsychIatHtml,
@@ -125,6 +176,9 @@
             left_category_label: ['GOOD'],
             right_category_label: ['BAD'],
             response_ends_trial: true,
+            data: {
+                typeoftrial: 'valence_iat'
+            }
             
             
     }
@@ -136,7 +190,7 @@
             timeline:[iat_valence_training],
             timeline_variables: valence_cues, 
             randomize_order: true, 
-            repetitions: 2, }
+            repetitions: 3, }
 
          var iat_novel_instructions = { 
             type: jsPsychInstructions,
@@ -144,7 +198,9 @@
                 'In the next section, you will differentiate between the familiar pseudowords you saw earlier in the experiment, and random pseudowords.',
                 ' If the word in the center of the screen is one of the familiar pseudowords previously seen in the experiment, press “A”. If it is a random pseudoword you have not seen before, press “L"'
             ],
-            show_clickable_nav: true }
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'} }
 
         var iat_novel_training  = {
             type: jsPsychIatHtml,
@@ -161,6 +217,9 @@
             left_category_label: ['FAMILIAR PSEUDOWORDS'],
             right_category_label: ['RANDOM PSEUDOWORDS'],
             response_ends_trial: true,
+            data: {
+                typeoftrial: 'novel_iat'
+            }
            
             
     
@@ -170,14 +229,16 @@
             timeline:[iat_novel_training],
             timeline_variables: novel_cues, 
             randomize_order: true, 
-            repetitions: 2, }
+            repetitions: 3, }
 
         var iat_congruent_instructions = { 
             type: jsPsychInstructions,
             pages: [
                 'Now, you will differentiate between both good and bad words, and familiar pseudowords (made-up words included in the experiment) and random pseudowords (unfamiliar made-up words).',
                 'If the word is either good OR a familiar pseudoword, press “A”. If it is either bad OR a random pseudoword, press “L”.' ],
-            show_clickable_nav: true }
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'} }
 
         var iat_congruent_training  = {
             type: jsPsychIatHtml,
@@ -193,7 +254,10 @@
             right_category_key: 'L',
             left_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
             right_category_label: ['RANDOM PSEUDOWORDS', 'BAD'],
-            response_ends_trial: true
+            response_ends_trial: true,
+            data: {
+                typeoftrial: 'congruent_iat'
+            }
             
     
       }
@@ -209,7 +273,9 @@
             pages: [
                 'If the word is either good OR random psuedoword (an unfamiliar made-up word), press “A”. If it is either bad OR familiar pseudoword (a made-up word included in the experiment), press “L”.'
             ],
-            show_clickable_nav: true }
+            show_clickable_nav: true, 
+            data: {
+                typeoftrial: 'instructions'}}
 
         var iat_incongruent_training  = {
             type: jsPsychIatHtml,
@@ -225,7 +291,10 @@
             right_category_key: 'L',
             left_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
             right_category_label: ['RANDOM PSEUDOWORDS', 'GOOD'],
-            response_ends_trial: true
+            response_ends_trial: true,
+            data: {
+                typeoftrial: 'incongruent_iat'
+            }
             
     
       }
@@ -241,12 +310,18 @@
             pages: [
                 'Next you will write a few sentences using specifc words.'
             ],
-            show_clickable_nav: true }
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'}
+        }
    
 
        var use = {
         type:jsPsychSurveyText,
         questions:[{prompt: jsPsych.timelineVariable('cue')}],
+        data: {
+            typeoftrial: 'use_in_sentence'
+        }
        }
        var use_procedure= {
         timeline: [use],
