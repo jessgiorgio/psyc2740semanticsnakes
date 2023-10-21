@@ -329,7 +329,7 @@
             typeoftrial: 'use_in_sentence'
         },
         on_finish: function(data) {
-                    console.log(data.response)
+            data.response = data.response.Q0
                     }
        }
 
@@ -431,9 +431,6 @@ var demo_instructions = {
                 data: {
                     typeoftrial: 'language',
                 },
-                    on_finish: function(data) {
-                    console.log(data.response)
-                    }
             }
 
        
@@ -445,8 +442,8 @@ var demo_instructions = {
                 typeoftrial: 'other_info'
             },
             on_finish: function(data) {
-                    console.log(data.response)
-                    }
+                data.other_info = data.response.Q0;
+                }
     }
 
         var demographics= {
