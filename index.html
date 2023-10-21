@@ -374,18 +374,63 @@
             }],
 
        }
+       //var nonEnglishQuestions = {
+           // type: jsPsychSurveyText,
+            //questions: [{prompt: 'What is your first language?',required: true},
+           // {prompt: 'At what age did you learn English?',required: true}]
+      // };
 
-        var demo_lang=  {
-            type:jsPsychHtmlButtonResponse,
+      /* var demo_lang = {
+            type: jsPsychHtmlButtonResponse,
             stimulus: 'Is English your first language?',
-            choices: ['No', 'Yes'], 
-                data: {
-                    typeoftrial: 'language',
-                },
-                    on_finish: function(data) {
-                    console.log(data.response)
-                    }
-            }
+            choices: ['No', 'Yes'],
+            data: {
+                typeoftrial: 'language',
+            },
+            on_finish: function (data) {
+                if (data.response === 0) {
+                    return additionalQuestions;
+                   // can't return a variable? can you return something else?
+                } else {
+
+                }
+            },
+            };
+        */
+
+        //how chatGPT wanted me to do the follow up questions
+        var additionalQuestions = {
+        timeline: [
+            {
+            type: jsPsychSurveyText,
+            questions: [
+                { prompt: 'What is your first language?', required: true },
+                { prompt: 'At what age did you learn English?', required: true },
+            ],
+            },
+        ],
+        conditional_function: function () {
+            // Check the response to 'Is English your first language?' question
+            var lastTrialData = jsPsych.data.get().filter({typeoftrial: 'language'}).last(1).values()[0];
+            return lastTrialData.response.button_pressed === 'No';
+        },
+        };
+
+        var demo_lang = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: 'Is English your first language?',
+        choices: ['No', 'Yes'],
+        data: {
+            typeoftrial: 'language',
+        },
+     
+        };
+
+
+
+                    
+                
+            
 
        
 
@@ -410,7 +455,7 @@
        }
 
 
-       jsPsych.run([initial_instructions, training_plus_association, iat_valence_instructions, iat_valence_procedure, iat_novel_instructions, iat_novel_procedure, iat_congruent_instructions, iat_congruent_procedure, iat_incongruent_instructions, iat_incongruent_procedure, use_instructions, use_procedure
+       jsPsych.run([demo_lang, additionalQuestions
 ]);
     </script>
 </html>
