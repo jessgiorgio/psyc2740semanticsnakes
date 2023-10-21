@@ -333,11 +333,36 @@
         timeline: [use],
         timeline_variables: use_cues,
         randomize_order: true,
-        repetitions: 3
+        repetitions: 3 } 
 
-        
-       }
+        var use_timeline = {
+        timeline: [use_instructions, use_procedure]
+        }
 
+var extensions = {
+    timeline: [iat_timeline, use_timeline],
+};
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+shuffleArray(extensions.timeline);
+
+
+var demo_instructions = {
+    type:jsPsychInstructions,
+            pages: [
+                'Thank you for your effort so far in this experiment. Finally, you will fill out a short demographics survey.'
+            ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'}
+        }
        
 	    var age_gender_demo = {
         type: jsPsychSurveyText,
@@ -398,7 +423,7 @@
     }
 
         var demographics= {
-                    timeline: [age_gender_demo, demo_survey, demo_lang, other_info_demo]
+                    timeline: [demo_instructions, age_gender_demo, demo_survey, demo_lang, other_info_demo]
                 }
 
        var thank_you = {
@@ -410,7 +435,6 @@
        }
 
 
-       jsPsych.run([initial_instructions, training_plus_association, iat_valence_instructions, iat_valence_procedure, iat_novel_instructions, iat_novel_procedure, iat_congruent_instructions, iat_congruent_procedure, iat_incongruent_instructions, iat_incongruent_procedure, use_instructions, use_procedure
-]);
+       jsPsych.run([initial_instructions, training_plus_association, extensions, demographics, thank_you])
     </script>
 </html>
