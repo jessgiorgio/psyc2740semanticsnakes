@@ -415,7 +415,10 @@
         questions:[{prompt: 'Is there anything else we should know about, which might have affected your performance during the experiment? (e.g., lack of sleep, feeling ill etc.)'}],
             data: {
                 typeoftrial: 'other_info'
-            }
+            },
+            on_finish: function(data) {
+                    console.log(data.response)
+                    }
     }
 
         var demographics= {
