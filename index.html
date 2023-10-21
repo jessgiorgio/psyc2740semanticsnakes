@@ -327,8 +327,12 @@
         questions:[{prompt: jsPsych.timelineVariable('cue')}],
         data: {
             typeoftrial: 'use_in_sentence'
-        }
+        },
+        on_finish: function(data) {
+            data.response = data.response.Q0
+                    }
        }
+
        var use_procedure= {
         timeline: [use],
         timeline_variables: use_cues,
@@ -337,15 +341,52 @@
 
         
        }
+       var use_timeline = {
+        timeline: [use_instructions, use_procedure]
+        }
+
+var extensions = {
+    timeline: [iat_timeline, use_timeline],
+};
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+shuffleArray(extensions.timeline);
+
+
+var demo_instructions = {
+    type:jsPsychInstructions,
+            pages: [
+                'Thank you for your effort so far in this experiment. Finally, you will fill out a short demographics survey.'
+            ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'}
+        }
 
        
-	    var age_gender_demo = {
+	    var age_gender_educ_demo = {
         type: jsPsychSurveyText,
-        questions:[{prompt: "What is your age?"},
-        {prompt: 'What is your gender?'}, 
-        {prompt:'How many years of formal education have you had? (consider graduating high school to be 12 years)'}],
-        required: true,
-        required_error: 'Please answer all questions on this page'
+        questions:[{prompt: "What is your age?", required: true},
+        {prompt: 'What is your gender?', required: true}, 
+        {prompt:'How many years of formal education have you had? (consider graduating high school to be 12 years)', required: true}],
+        required_error: 'Please answer all questions on this page',
+
+        data: {
+            typeoftrial: 'demopt1'
+        }, 
+
+        on_finish: function(data) {  
+                data.age = data.response.Q0;
+                data.gender = data.response.Q1;
+                data.educ = data.response.Q2;
+        }
         }
 
        var demo_survey = {
@@ -356,29 +397,32 @@
             options: ["American Indian/Alaskan Native", "Asian", "Black/African American", "Native Hawaiian or Other Pacific Islander", "White/Caucasian", "More than once race", "Other"], 
             horizontal: true,
             required: true,
-            name: 'Race'
+            name: 'race'
             }, 
             {
             prompt: "What is your dominant hand?", 
             options: ["Right", "Left", "Ambidextrous"], 
             horizontal: true,
             required: true,
-            name: 'Hand'
+            name: 'hand'
             },
             {
             prompt: "Please indicate what time of the day you feel most alert:", 
             options: ["Morning", "Afternoon", "Evening", "No differences"], 
             horizontal: true,
             required: true,
-            name: 'Time_of_day'
+            name: 'alert'
             }],
+            data:{
+                typeoftrial: 'demopt2'
+            },
 
-       }
-       //var nonEnglishQuestions = {
-           // type: jsPsychSurveyText,
-            //questions: [{prompt: 'What is your first language?',required: true},
-           // {prompt: 'At what age did you learn English?',required: true}]
-      // };
+            on_finish: function(data) {  
+                data.race = data.response.Q0;
+                data.hand = data.response.Q1;
+                data.alert = data.response.Q2;
+            }
+        }
 
       /* var demo_lang = {
             type: jsPsychHtmlButtonResponse,
@@ -439,11 +483,14 @@
         questions:[{prompt: 'Is there anything else we should know about, which might have affected your performance during the experiment? (e.g., lack of sleep, feeling ill etc.)'}],
             data: {
                 typeoftrial: 'other_info'
-            }
+            },
+            on_finish: function(data) {
+                data.other_info = data.response.Q0;
+                }
     }
 
         var demographics= {
-                    timeline: [age_gender_demo, demo_survey, demo_lang, other_info_demo]
+                    timeline: [age_gender_educ_demo, demo_survey, demo_lang, other_info_demo]
                 }
 
        var thank_you = {
@@ -455,7 +502,6 @@
        }
 
 
-       jsPsych.run([demo_lang, additionalQuestions
-]);
+       jsPsych.run([initial_instructions, training_plus_association, extensions, demographics, thank_you])
     </script>
 </html>
