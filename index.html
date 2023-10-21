@@ -325,8 +325,12 @@
         questions:[{prompt: jsPsych.timelineVariable('cue')}],
         data: {
             typeoftrial: 'use_in_sentence'
-        }
+        },
+        on_finish: function(data) {
+                    console.log(data.response)
+                    }
        }
+
        var use_procedure= {
         timeline: [use],
         timeline_variables: use_cues,
@@ -337,13 +341,22 @@
        }
 
        
-	    var age_gender_demo = {
+	    var age_gender_educ_demo = {
         type: jsPsychSurveyText,
-        questions:[{prompt: "What is your age?"},
-        {prompt: 'What is your gender?'}, 
-        {prompt:'How many years of formal education have you had? (consider graduating high school to be 12 years)'}],
-        required: true,
-        required_error: 'Please answer all questions on this page'
+        questions:[{prompt: "What is your age?", required: true},
+        {prompt: 'What is your gender?', required: true}, 
+        {prompt:'How many years of formal education have you had? (consider graduating high school to be 12 years)', required: true}],
+        required_error: 'Please answer all questions on this page',
+
+        data: {
+            typeoftrial: 'demopt1'
+        }, 
+
+        on_finish: function(data) {  
+                data.age = data.response.Q0;
+                data.gender = data.response.Q1;
+                data.educ = data.response.Q2;
+        }
         }
 
        var demo_survey = {
@@ -354,24 +367,32 @@
             options: ["American Indian/Alaskan Native", "Asian", "Black/African American", "Native Hawaiian or Other Pacific Islander", "White/Caucasian", "More than once race", "Other"], 
             horizontal: true,
             required: true,
-            name: 'Race'
+            name: 'race'
             }, 
             {
             prompt: "What is your dominant hand?", 
             options: ["Right", "Left", "Ambidextrous"], 
             horizontal: true,
             required: true,
-            name: 'Hand'
+            name: 'hand'
             },
             {
             prompt: "Please indicate what time of the day you feel most alert:", 
             options: ["Morning", "Afternoon", "Evening", "No differences"], 
             horizontal: true,
             required: true,
-            name: 'Time_of_day'
+            name: 'alert'
             }],
+            data:{
+                typeoftrial: 'demopt2'
+            },
 
-       }
+            on_finish: function(data) {  
+                data.race = data.response.Q0;
+                data.hand = data.response.Q1;
+                data.alert = data.response.Q2;
+            }
+        }
 
         var demo_lang=  {
             type:jsPsychHtmlButtonResponse,
@@ -396,7 +417,7 @@
     }
 
         var demographics= {
-                    timeline: [age_gender_demo, demo_survey, demo_lang, other_info_demo]
+                    timeline: [age_gender_educ_demo, demo_survey, demo_lang, other_info_demo]
                 }
 
        var thank_you = {
@@ -408,7 +429,8 @@
        }
 
 
-       jsPsych.run([demographics, thank_you
-]);
+       //jsPsych.run([initial_instructions, training_plus_association, iat_valence_instructions, iat_valence_procedure, iat_novel_instructions, iat_novel_procedure, iat_congruent_instructions, iat_congruent_procedure, iat_incongruent_instructions, iat_incongruent_procedure, use_instructions, use_procedure, demographics, thank_you
+//]);
+jsPsych.run([demographics])
     </script>
 </html>
