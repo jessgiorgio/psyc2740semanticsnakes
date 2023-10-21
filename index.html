@@ -250,7 +250,7 @@
             key_to_move_forward: "ALL_KEYS",
             stim_key_association: jsPsych.timelineVariable ("correct_key"),
             //html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            //bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+            bottom_instructions: 'Please answer as quickly as possible.',
             //force_correct_key_press: true,
             //display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
@@ -287,7 +287,7 @@
             key_to_move_forward: "ALL_KEYS",
             stim_key_association: jsPsych.timelineVariable ("correct_key"),
             //html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            //bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+            bottom_instructions: 'Please answer as quickly as possible.',
             //force_correct_key_press: true,
             //display_feedback: true,
             trial_duration: 2000, //Only if display_feedback is false,
@@ -318,7 +318,9 @@
             data: {
                 typeoftrial: 'instructions'}
         }
-   
+        
+        var iat_timeline = {
+        timeline: [iat_valence_instructions, iat_valence_procedure, iat_novel_instructions, iat_novel_procedure, iat_congruent_instructions, iat_congruent_procedure, iat_incongruent_instructions, iat_incongruent_procedure] }
 
        var use = {
         type:jsPsychSurveyText,
@@ -408,7 +410,7 @@
        }
 
 
-       jsPsych.run([demographics, thank_you
+       jsPsych.run([iat_timeline
 ]);
     </script>
 </html>
