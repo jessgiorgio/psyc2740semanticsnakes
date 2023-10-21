@@ -20,6 +20,9 @@
         <script src="incongruent.js"></script>
         <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.3"></script>
         <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
+        <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
+        <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+
     
     </head>
     <body></body>
@@ -334,12 +337,14 @@
        }
 
        
-	       var age_gender_demo = {
-        type:jsPsychSurveyText,
+	    var age_gender_demo = {
+        type: jsPsychSurveyText,
         questions:[{prompt: "What is your age?"},
         {prompt: 'What is your gender?'}, 
         {prompt:'How many years of formal education have you had? (consider graduating high school to be 12 years)'}],
-       } 
+        required: true,
+        required_error: 'Please answer all questions on this page'
+        }
 
        var demo_survey = {
             type: jsPsychSurveyMultiSelect,
@@ -364,22 +369,35 @@
             horizontal: true,
             required: true,
             name: 'Time_of_day'
-            }]
+            }],
+
        }
 
         var demo_lang=  {
-            type:jsPsychSurveyMultiSelect,
-            prompt: "Is English your first language?", 
-            options: ["Yes", "No"], 
-            horizontal: true,
-            required: true,
-            name: 'First_language'
+            type:jsPsychHtmlButtonResponse,
+            stimulus: 'Is English your first language?',
+            choices: ['No', 'Yes'], 
+                data: {
+                    typeoftrial: 'language',
+                },
+                    on_finish: function(data) {
+                    console.log(data.response)
+                    }
             }
+
+       
 
        var other_info_demo = {
         type:jsPsychSurveyText,
-        questions:[{prompt: 'Is there anything else we should know about, which might have affected your performance during the experiment? (e.g., lack of sleep, feeling ill etc.)'}]
-       }
+        questions:[{prompt: 'Is there anything else we should know about, which might have affected your performance during the experiment? (e.g., lack of sleep, feeling ill etc.)'}],
+            data: {
+                typeoftrial: 'other_info'
+            }
+    }
+
+        var demographics= {
+                    timeline: [age_gender_demo, demo_survey, demo_lang, other_info_demo]
+                }
 
        var thank_you = {
         type: jsPsychHtmlKeyboardResponse,
@@ -390,7 +408,7 @@
        }
 
 
-       jsPsych.run([demo_lang, other_info_demo, thank_you
+       jsPsych.run([demographics, thank_you
 ]);
     </script>
 </html>
