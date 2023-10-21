@@ -87,7 +87,7 @@
 
     var attention = {
         type:jsPsychSurveyText,
-        questions: [{prompt: "Type any ONE novel word from the previous sentence:"} ],
+        questions: [{prompt: "Type any ONE pseudoword from the previous sentence:"} ],
         data: {
                 typeoftrial: 'attention',
     },
@@ -408,7 +408,7 @@
        }
 
 
-       jsPsych.run([demographics, thank_you
+       jsPsych.run([initial_instructions, training_plus_association, iat_valence_instructions, iat_valence_procedure, iat_novel_instructions, iat_novel_procedure, iat_congruent_instructions, iat_congruent_procedure, iat_incongruent_instructions, iat_incongruent_procedure, use_instructions, use_procedure
 ]);
     </script>
 </html>
