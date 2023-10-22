@@ -22,7 +22,6 @@
         <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
         <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
         <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
-
     
     </head>
     <body></body>
@@ -158,8 +157,9 @@
         var iat_valence_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Next, you will complete an association task.',
-                'When a word appears in the center of your screen, click the key “A” if it is a good word and “L” if it is a bad word.'
+                'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
+                'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure. ',
+                'Here is the first practice session: When a word appears in the center of your screen, click the key “A” if it is a <b>good</b> word and “L” if it is a <b>bad</b> word.'
             ],
             show_clickable_nav: true,
             data: {
@@ -199,8 +199,8 @@
          var iat_novel_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'In the next section, you will differentiate between the familiar pseudowords (made-up words included in the experiment), and random pseudowords (unfamiliar made-up words).',
-                ' If the word in the center of the screen is one of the familiar pseudowords, press “A”. If it is a random pseudoword you have not seen before, press “L".'
+                'In the next practice section, you will differentiate between the <b>familiar pseudowords</b> (made-up words included in the experiment), and <b>random pseudowords</b> (unfamiliar made-up words).',
+                ' If the word in the center of the screen is one of the <b>familiar psuedowords</b>, press “A”. If it is a <b>random pseudoword</b> you have not seen before, press “L".'
             ],
             show_clickable_nav: true,
             data: {
@@ -238,8 +238,8 @@
         var iat_congruent_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Now, you will differentiate between both good and bad words, and familiar pseudowords (made-up words included in the experiment) and random pseudowords (unfamiliar made-up words).',
-                'If the word is either good OR a familiar pseudoword, press “A”. If it is either bad OR a random pseudoword, press “L”.' ],
+                'Now, you will differentiate between both <b>good and bad words</b>, and <b>familiar pseudowords</b> (made-up words included in the experiment) and <b>random pseudowords</b> (unfamiliar made-up words).',
+                'If the word is either a <b>good or familiar pseudoword</b>, press “A”. If it is either a <b>bad or random pseudoword</b>, press “L”.' ],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -275,7 +275,7 @@
         var iat_incongruent_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'If the word is either good OR random psuedoword (an unfamiliar made-up word), press “A”. If it is either bad OR familiar pseudoword (a made-up word included in the experiment), press “L”.'
+                'If the word is either <b>good or random pseudoword</b> (an unfamiliar made-up word), press “A”. If it is either a <b>bad or familiar psuedoword</b> (a made-up word included in the experiment), press “L”.'
             ],
             show_clickable_nav: true, 
             data: {
