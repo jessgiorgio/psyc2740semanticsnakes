@@ -424,25 +424,7 @@ var demo_instructions = {
             }
         }
 
-      /* var demo_lang = {
-            type: jsPsychHtmlButtonResponse,
-            stimulus: 'Is English your first language?',
-            choices: ['No', 'Yes'],
-            data: {
-                typeoftrial: 'language',
-            },
-            on_finish: function (data) {
-                if (data.response === 0) {
-                    return additionalQuestions;
-                   // can't return a variable? can you return something else?
-                } else {
-
-                }
-            },
-            };
-        */
-
-        //how chatGPT wanted me to do the follow up questions
+      
         var additionalQuestions = {
         timeline: [
             {
@@ -453,11 +435,6 @@ var demo_instructions = {
             ],
             },
         ],
-        conditional_function: function () {
-            // Check the response to 'Is English your first language?' question
-            var lastTrialData = jsPsych.data.get().filter({typeoftrial: 'language'}).last(1).values()[0];
-            return lastTrialData.response.button_pressed === 'No';
-        },
         };
 
         var demo_lang = {
@@ -467,16 +444,14 @@ var demo_instructions = {
         data: {
             typeoftrial: 'language',
         },
-     
-        };
+        on_finish: function (data){
+            if (data.response === 0) {
+                jsPsych.addNodeToEndOfTimeline (additionalQuestions)
+        } 
+        }
+        }
 
 
-
-                    
-                
-            
-
-       
 
        var other_info_demo = {
         type:jsPsychSurveyText,
