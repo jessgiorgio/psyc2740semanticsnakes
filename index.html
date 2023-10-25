@@ -43,7 +43,7 @@
             pages: [
             'You have selected to take the Semantic Association Task',
             'Today you will be completing a series of exercises related to semantic cognition',
-            'In the first task, you will read sentences with pseudowords (made-up words for this task',
+            'In the first task, you will read sentences with pseudowords (made-up words)',
             'Please read them carefully. You will occasionally be presented with attention checks'
             ],
             show_clickable_nav: true,
@@ -54,7 +54,7 @@
          var association_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Now you will write the first word that comes to mind when presented with the stimuli.'
+                'Now you will write the <b>first word</b> that comes to mind when presented with the stimuli.'
             ],
             show_clickable_nav: true,
             data: {
@@ -130,7 +130,7 @@
 
     var association = {
         type:jsPsychSurveyText,
-        preamble: 'Type in the first word that comes to mind when you see the word below:',
+        preamble: 'Type in the <b>first word</b> that comes to mind when you see the word below:',
         questions: [{prompt: jsPsych.timelineVariable('cue')}],
         trial_duration: 10, 
         data: {
@@ -170,7 +170,7 @@
     var iat_general_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
+                'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as quickly and accurately as you can.',
                 'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure. ',
                 'Here is the first practice session: When a word appears in the center of your screen, click the key “A” if it is a <b>good</b> word and “L” if it is a <b>bad</b> word.'
             ],
@@ -560,7 +560,7 @@ shuffleArray(incongruent.timeline);
         var use_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Next you will write a few sentences using specific words.'
+                'Next you will write sentences using specific words.'
 
             ],
             show_clickable_nav: true,
@@ -741,6 +741,6 @@ var demo_instructions = {
        }
 
 
-       jsPsych.run([training_plus_association])
-    </script>
+       jsPsych.run([initial_instructions, training_plus_association, extensions, demographics, thank_you])
+     </script>
 </html>
