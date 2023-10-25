@@ -42,10 +42,10 @@
          var initial_instructions = { 
             type: jsPsychInstructions,
             pages: [
-            'You have selected to take the Semantic Association Task',
-            'Today you will be completing a series of exercises related to semantic cognition',
-            'In the first task, you will read sentences with pseudowords (made-up words)',
-            'Please read them carefully. You will occasionally be presented with attention checks'
+            'You have selected to take the Semantic Association Task.',
+            'Today you will be completing a series of exercises related to semantic cognition.',
+            'In the first task, you will read sentences with pseudowords (made-up words).',
+            'Please read them carefully. You will occasionally be presented with attention checks.'
             ],
             show_clickable_nav: true,
             data: {
@@ -182,10 +182,8 @@
         var iat_valence_instructions1 = { 
             type: jsPsychInstructions,
             pages: [
-                'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
-                'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure.',
-                'Here is the first practice session: When a word appears in the center of your screen, click the key “A” if it is a <b>good</b> word and “L” if it is a <b>bad</b> word.'
-            ],
+                'Put a left finger on the <b>A</b> key for items that belong to the category <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the category <b>Bad</b>.</br><br>Items will appear one at a time.</br><br>If you make a mistake, a red X (bold and red) will appear. Press the other key to continue.</br><br>Go as fast as you can while being accurate.</br><br></br>Press <b>Next</b> when you are ready to start.'
+        ],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -212,9 +210,7 @@
             var iat_valence_instructions2 = { 
             type: jsPsychInstructions,
             pages: [
-                'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
-                'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure. ',
-                'Here is the first practice session: When a word appears in the center of your screen, click the key “A” if it is a <b>good</b> word and “L” if it is a <b>bad</b> word.'
+            'Put a left finger on the <b>A</b> key for items that belong to the category <b>Bad</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the category <b>Good</b>.</br><br>Items will appear one at a time.</br><br>If you make a mistake, a red X (bold and red) will appear. Press the other key to continue.</br><br>Go as fast as you can while being accurate.</br><br></br>Press <b>Next</b> when you are ready to start.'
             ],
             show_clickable_nav: true,
             data: {
@@ -281,9 +277,8 @@ shuffleArray(valence.timeline);
          var iat_novel_instructions1 = { 
             type: jsPsychInstructions,
             pages: [
-                'In the next practice section, you will differentiate between the <b>familiar pseudowords</b> (made-up words included in the experiment), and <b>random pseudowords</b> (unfamiliar made-up words).',
-                ' If the word in the center of the screen is one of the <b>familiar psuedowords</b>, press “A”. If it is a <b>random pseudoword</b> you have not seen before, press “L".'
-            ],
+              'Put a left finger on the <b>A</b> key for items that belong to the category <b>Unfamiliar Pseudowords</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the category <b>Familiar Pseudowords</b>.</br><br>Items will appear one at a time.</br><br>If you make a mistake, a red X (bold and red) will appear. Press the other key to continue.</br><br>Go as fast as you can while being accurate.</br><br></br>Press <b>Next</b> when you are ready to start.'
+         ],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -301,7 +296,7 @@ shuffleArray(valence.timeline);
             left_category_key: 'A',
             right_category_key: 'L',
             left_category_label: ['FAMILIAR PSEUDOWORDS'],
-            right_category_label: ['RANDOM PSEUDOWORDS'],
+            right_category_label: ['UNFAMILIAR PSEUDOWORDS'],
             response_ends_trial: true,
             data: {
                 typeoftrial: 'novel_iat'
@@ -311,9 +306,9 @@ shuffleArray(valence.timeline);
         var iat_novel_instructions2 = { 
             type: jsPsychInstructions,
             pages: [
-                'In the next practice section, you will differentiate between the <b>familiar pseudowords</b> (made-up words included in the experiment), and <b>random pseudowords</b> (unfamiliar made-up words).',
-                ' If the word in the center of the screen is one of the <b>familiar psuedowords</b>, press “A”. If it is a <b>random pseudoword</b> you have not seen before, press “L".'
+                'Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Good</b> .<br> Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Bad</b>.</br><br>‘Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br> Press the spacebar (bold) when you are ready to start.'
             ],
+
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -330,7 +325,7 @@ shuffleArray(valence.timeline);
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['RANDOM PSEUDOWORDS'],
+            left_category_label: ['UNFAMILIAR PSEUDOWORDS'],
             right_category_label: ['FAMILIAR PSEUDOWORDS'],
             response_ends_trial: true,
             data: {
@@ -377,7 +372,7 @@ shuffleArray(novel.timeline);
 
         var iat_congruent_instructions1 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories (Familiar pseudowords or Good- color green).<br>Put a right finger on the <b>L</b> key for items that belong to the categories (Unfamiliar pseudowords OR Bad - color green).</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate.</br><br></br>Press <b>Next</b> when you are ready to start.'],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br><br></br>Go as fast as you can while being accurate.<br></br>Press the <b>spacebar</b> when you are ready to start.'],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -395,7 +390,7 @@ shuffleArray(novel.timeline);
             left_category_key: 'A',
             right_category_key: 'L',
             left_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
-            right_category_label: ['RANDOM PSEUDOWORDS', 'BAD'],
+            right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
             response_ends_trial: true,
             data: {
                 typeoftrial: 'congruent_iat'
@@ -405,7 +400,7 @@ shuffleArray(novel.timeline);
       }
       var iat_congruent_instructions2 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories (Unfamiliar pseudowords OR Bad - color green).<br>Put a right finger on the <b>L</b> key for items that belong to the categories (Familiar pseudowords OR Good - color green).</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate.</br><br></br>Press <b>Next</b> when you are ready to start.'],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Bad</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Good</b>.</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate. </br>Press the spacebar (bold) when you are ready to start.'],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -422,7 +417,7 @@ shuffleArray(novel.timeline);
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['RANDOM PSEUDOWORDS', 'BAD'],
+            left_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
             right_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
             response_ends_trial: true,
             data: {
@@ -467,7 +462,7 @@ shuffleArray(congruent.timeline);
 
         var iat_incongruent_instructions1 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories (Familiar pseudowords OR Bad- color green).<br>Put a right finger on the <b>L</b> key for items that belong to the categories (Unfamiliar pseudowords OR Good - color green).</br> <br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate.</br><br></br> Press <b>Next</b> when you are ready to start.'
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Bad</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Good</b>.</br><br>Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br>Press the spacebar (bold) when you are ready to start.'
                 ],
             show_clickable_nav: true, 
             data: {
@@ -486,7 +481,7 @@ shuffleArray(congruent.timeline);
             left_category_key: 'A',
             right_category_key: 'L',
             left_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
-            right_category_label: ['RANDOM PSEUDOWORDS', 'GOOD'],
+            right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'GOOD'],
             response_ends_trial: true,
             data: {
                 typeoftrial: 'incongruent_iat'
@@ -496,7 +491,8 @@ shuffleArray(congruent.timeline);
       }
       var iat_incongruent_instructions2 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories (Unfamiliar pseudowords OR Good - color green).<br> Put a right finger on the <b>L</b> key for items that belong to the categories (Familiar pseudowords OR Bad - color green).</br><br>Items will appear one at a time.</br> <br>Go as fast as you can while being accurate.</br><br></br> Press <b>Next</b> when you are ready to start.'],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Good</b> .<br> Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Bad</b>.</br><br>‘Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br> Press the spacebar (bold) when you are ready to start.'
+            ],
             show_clickable_nav: true, 
             data: {
                 typeoftrial: 'instructions'}}
@@ -513,7 +509,7 @@ shuffleArray(congruent.timeline);
             trial_duration: 2000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['RANDOM PSEUDOWORDS', 'GOOD'],
+            left_category_label: ['UNFAMILIAR PSEUDOWORDS', 'GOOD'],
             right_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
             response_ends_trial: true,
             data: {
@@ -742,6 +738,6 @@ var demo_instructions = {
        }
 
 
-       jsPsych.run([initial_instructions, training_plus_association, extensions, demographics, thank_you])
+       jsPsych.run([initial_instructions, use_instructions, iat_valence_instructions1, iat_valence_instructions2, iat_novel_instructions1, iat_novel_instructions2, iat_general_instructions, association_instructions])
      </script>
 </html>
