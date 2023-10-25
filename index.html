@@ -22,6 +22,7 @@
         <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
         <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
         <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+        <script src="table.md"></script>
     
     </head>
     <body></body>
@@ -156,9 +157,9 @@
     var iat_general_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
-                'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure. ',
-                'Here is the first practice session: When a word appears in the center of your screen, click the key “A” if it is a <b>good</b> word and “L” if it is a <b>bad</b> word.'
+                "Next, you will use the 'A' and 'L' computer keys to categorize items into groups as fast as you can. These are the four groups and the items that belong to each.",
+                "table.md"
+                
             ],
             show_clickable_nav: true,
             data: {
@@ -733,6 +734,6 @@ var demo_instructions = {
        }
 
 
-       jsPsych.run([extensions])
+       jsPsych.run([iat_general_instructions])
     </script>
 </html>
