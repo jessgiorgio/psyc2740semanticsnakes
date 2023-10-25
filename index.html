@@ -41,9 +41,10 @@
          var initial_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Hello, welcome to the experiment.',
-                'Today you will be completing a series of exercises related to cognition.',
-                'In the first task, you will read sentences with madeup words (pseudowords). Please read carefully. You will be occasionally presented with attention checks. Press the spacebar after you have read each sentnece.'
+            'You have selected to take the Semantic Association Task',
+            'Today you will be completing a series of exercises related to semantic cognition',
+            'In the first task, you will read sentences with pseudowords (made-up words for this task',
+            'Please read them carefully. You will occasionally be presented with attention checks'
             ],
             show_clickable_nav: true,
             data: {
@@ -168,7 +169,7 @@
             type: jsPsychInstructions,
             pages: [
                 'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
-                'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure. ',
+                'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure.',
                 'Here is the first practice session: When a word appears in the center of your screen, click the key “A” if it is a <b>good</b> word and “L” if it is a <b>bad</b> word.'
             ],
             show_clickable_nav: true,
@@ -362,9 +363,7 @@ shuffleArray(novel.timeline);
 
         var iat_congruent_instructions1 = { 
             type: jsPsychInstructions,
-            pages: [
-                'Now, you will differentiate between both <b>good and bad words</b>, and <b>familiar pseudowords</b> (made-up words included in the experiment) and <b>random pseudowords</b> (unfamiliar made-up words).',
-                'If the word is either a <b>good or familiar pseudoword</b>, press “A”. If it is either a <b>bad or random pseudoword</b>, press “L”.' ],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories (Familiar pseudowords or Good- color green).<br>Put a right finger on the <b>L</b> key for items that belong to the categories (Unfamiliar pseudowords OR Bad - color green).</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate.</br><br></br>Press <b>Next</b> when you are ready to start.'],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -392,9 +391,7 @@ shuffleArray(novel.timeline);
       }
       var iat_congruent_instructions2 = { 
             type: jsPsychInstructions,
-            pages: [
-                'Now, you will differentiate between both <b>good and bad words</b>, and <b>familiar pseudowords</b> (made-up words included in the experiment) and <b>random pseudowords</b> (unfamiliar made-up words).',
-                'If the word is either a <b>good or familiar pseudoword</b>, press “A”. If it is either a <b>bad or random pseudoword</b>, press “L”.' ],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories (Unfamiliar pseudowords OR Bad - color green).<br>Put a right finger on the <b>L</b> key for items that belong to the categories (Familiar pseudowords OR Good - color green).</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate.</br><br></br>Press <b>Next</b> when you are ready to start.'],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -456,9 +453,8 @@ shuffleArray(congruent.timeline);
 
         var iat_incongruent_instructions1 = { 
             type: jsPsychInstructions,
-            pages: [
-                'If the word is either <b>good or random pseudoword</b> (an unfamiliar made-up word), press “A”. If it is either a <b>bad or familiar psuedoword</b> (a made-up word included in the experiment), press “L”.'
-            ],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories (Familiar pseudowords OR Bad- color green).<br>Put a right finger on the <b>L</b> key for items that belong to the categories (Unfamiliar pseudowords OR Good - color green).</br> <br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate.</br><br></br> Press <b>Next</b> when you are ready to start.'
+                ],
             show_clickable_nav: true, 
             data: {
                 typeoftrial: 'instructions'}}
@@ -486,9 +482,7 @@ shuffleArray(congruent.timeline);
       }
       var iat_incongruent_instructions2 = { 
             type: jsPsychInstructions,
-            pages: [
-                'If the word is either <b>good or random pseudoword</b> (an unfamiliar made-up word), press “A”. If it is either a <b>bad or familiar psuedoword</b> (a made-up word included in the experiment), press “L”.'
-            ],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories (Unfamiliar pseudowords OR Good - color green).<br> Put a right finger on the <b>L</b> key for items that belong to the categories (Familiar pseudowords OR Bad - color green).</br><br>Items will appear one at a time.</br> <br>Go as fast as you can while being accurate.</br><br></br> Press <b>Next</b> when you are ready to start.'],
             show_clickable_nav: true, 
             data: {
                 typeoftrial: 'instructions'}}
@@ -553,7 +547,8 @@ shuffleArray(incongruent.timeline);
         var use_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Next you will write a few sentences using specifc words.'
+                'Next you will write a few sentences using specific words.'
+
             ],
             show_clickable_nav: true,
             data: {
@@ -733,6 +728,6 @@ var demo_instructions = {
        }
 
 
-       jsPsych.run([extensions])
+       jsPsych.run([iat_congruent_instructions1,iat_congruent_instructions2,iat_incongruent_instructions1,iat_incongruent_instructions2])
     </script>
 </html>
