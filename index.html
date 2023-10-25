@@ -147,10 +147,23 @@
         randomize_order: true,
         repetitions: 3
     }
+
+    var after_association_instructions = { 
+            type: jsPsychInstructions,
+            pages: [
+                'You are now done with this set of training.',
+                'You will have 3 in total.',
+                'Press next to continue.'
+    ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'
+         } }
+
     
 
     var training_plus_association = {
-        timeline: [training_procedure, association_instructions, association_procedure],
+        timeline: [training_procedure, association_instructions, association_procedure, after_association_instructions],
         repetitions: 3
     }
     var iat_general_instructions = { 
@@ -733,6 +746,6 @@ var demo_instructions = {
        }
 
 
-       jsPsych.run([extensions])
+       jsPsych.run([training_plus_association])
     </script>
 </html>
