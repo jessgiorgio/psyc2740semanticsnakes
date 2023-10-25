@@ -153,8 +153,18 @@
         timeline: [training_procedure, association_instructions, association_procedure],
         repetitions: 3
     }
+    var iat_general_instructions = { 
+            type: jsPsychInstructions,
+            pages: [
+                'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
+                'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure. ',
+                'Here is the first practice session: When a word appears in the center of your screen, click the key “A” if it is a <b>good</b> word and “L” if it is a <b>bad</b> word.'
+            ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'} }
 
-        var iat_valence_instructions = { 
+        var iat_valence_instructions1 = { 
             type: jsPsychInstructions,
             pages: [
                 'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
@@ -183,6 +193,18 @@
             data: {
                 typeoftrial: 'valence_iat'
             }}
+
+            var iat_valence_instructions2 = { 
+            type: jsPsychInstructions,
+            pages: [
+                'Next, you will complete an Implicit Asociation Test (IAT). You will be asked to sort words into groups based on the indicated categories on the left and right side of the screen. Please complete this sorting as fast as you can.',
+                'You will have two practice trials that give you feedback on incorrect attempts to help familiarize yourself with the procedure. ',
+                'Here is the first practice session: When a word appears in the center of your screen, click the key “A” if it is a <b>good</b> word and “L” if it is a <b>bad</b> word.'
+            ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'} }
+
             
             var iat_valence_training2  = {
             type: jsPsychIatHtml,
@@ -211,14 +233,23 @@
             randomize_order: true, 
             repetitions: 1, }
 
+            var valence_timeline1 = {
+                timeline: [iat_valence_instructions1, iat_valence_procedure1]
+            }
+
             var iat_valence_procedure2 = { 
             timeline:[iat_valence_training2],
             timeline_variables: valence_cues, 
             randomize_order: true, 
             repetitions: 1, }
 
+            var valence_timeline2 = {
+                timeline: [iat_valence_instructions2, iat_valence_procedure2]
+            }
+
+
             var valence = {
-                timeline: [iat_valence_procedure1, iat_valence_procedure2]
+                timeline: [valence_timeline1, valence_timeline2]
             }
 
             function shuffleArray(array) {
@@ -232,7 +263,7 @@
 shuffleArray(valence.timeline);
 
 
-         var iat_novel_instructions = { 
+         var iat_novel_instructions1 = { 
             type: jsPsychInstructions,
             pages: [
                 'In the next practice section, you will differentiate between the <b>familiar pseudowords</b> (made-up words included in the experiment), and <b>random pseudowords</b> (unfamiliar made-up words).',
@@ -261,6 +292,16 @@ shuffleArray(valence.timeline);
                 typeoftrial: 'novel_iat'
             } 
         }
+
+        var iat_novel_instructions2 = { 
+            type: jsPsychInstructions,
+            pages: [
+                'In the next practice section, you will differentiate between the <b>familiar pseudowords</b> (made-up words included in the experiment), and <b>random pseudowords</b> (unfamiliar made-up words).',
+                ' If the word in the center of the screen is one of the <b>familiar psuedowords</b>, press “A”. If it is a <b>random pseudoword</b> you have not seen before, press “L".'
+            ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'} }
            
             var iat_novel_training2  = {
             type: jsPsychIatHtml,
@@ -290,14 +331,22 @@ shuffleArray(valence.timeline);
             randomize_order: true, 
             repetitions: 1, }
 
+            var novel_timeline1 = {
+                timeline: [iat_novel_instructions1, iat_novel_procedure1]
+            }
+
             var iat_novel_procedure2 = { 
             timeline:[iat_novel_training2],
             timeline_variables: novel_cues, 
             randomize_order: true, 
             repetitions: 1, }
 
+            var novel_timeline2 = {
+                timeline: [iat_novel_instructions2, iat_novel_procedure2]
+            }
+
             var novel = {
-                timeline: [iat_novel_procedure1, iat_novel_procedure2]
+                timeline: [novel_timeline1, novel_timeline2]
             }
 
             function shuffleArray(array) {
@@ -311,7 +360,7 @@ shuffleArray(valence.timeline);
 shuffleArray(novel.timeline);
 
 
-        var iat_congruent_instructions = { 
+        var iat_congruent_instructions1 = { 
             type: jsPsychInstructions,
             pages: [
                 'Now, you will differentiate between both <b>good and bad words</b>, and <b>familiar pseudowords</b> (made-up words included in the experiment) and <b>random pseudowords</b> (unfamiliar made-up words).',
@@ -341,6 +390,14 @@ shuffleArray(novel.timeline);
             
     
       }
+      var iat_congruent_instructions2 = { 
+            type: jsPsychInstructions,
+            pages: [
+                'Now, you will differentiate between both <b>good and bad words</b>, and <b>familiar pseudowords</b> (made-up words included in the experiment) and <b>random pseudowords</b> (unfamiliar made-up words).',
+                'If the word is either a <b>good or familiar pseudoword</b>, press “A”. If it is either a <b>bad or random pseudoword</b>, press “L”.' ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'} }
 
       var iat_congruent_training2  = {
             type: jsPsychIatHtml,
@@ -369,14 +426,22 @@ shuffleArray(novel.timeline);
             randomize_order: true, 
             repetitions: 1, }
 
+            var congruent_timeline1 = {
+                timeline: [iat_congruent_instructions1, iat_congruent_procedure1]
+            }
+
             var iat_congruent_procedure2 = { 
             timeline:[iat_congruent_training2],
             timeline_variables: congruent_cues, 
             randomize_order: true, 
             repetitions: 1, }
 
+            var congruent_timeline2 = {
+                timeline: [iat_congruent_instructions2, iat_congruent_procedure2]
+            }
+
             var congruent = {
-                timeline: [iat_congruent_procedure1, iat_congruent_procedure2]
+                timeline: [congruent_timeline1, congruent_timeline2]
             }
 
             function shuffleArray(array) {
@@ -389,7 +454,7 @@ shuffleArray(novel.timeline);
 }
 shuffleArray(congruent.timeline);
 
-        var iat_incongruent_instructions = { 
+        var iat_incongruent_instructions1 = { 
             type: jsPsychInstructions,
             pages: [
                 'If the word is either <b>good or random pseudoword</b> (an unfamiliar made-up word), press “A”. If it is either a <b>bad or familiar psuedoword</b> (a made-up word included in the experiment), press “L”.'
@@ -419,7 +484,14 @@ shuffleArray(congruent.timeline);
             
     
       }
-
+      var iat_incongruent_instructions2 = { 
+            type: jsPsychInstructions,
+            pages: [
+                'If the word is either <b>good or random pseudoword</b> (an unfamiliar made-up word), press “A”. If it is either a <b>bad or familiar psuedoword</b> (a made-up word included in the experiment), press “L”.'
+            ],
+            show_clickable_nav: true, 
+            data: {
+                typeoftrial: 'instructions'}}
 
       var iat_incongruent_training2  = {
             type: jsPsychIatHtml,
@@ -450,14 +522,22 @@ shuffleArray(congruent.timeline);
             randomize_order: true, 
             repetitions: 1, }
 
+            var incongruent_timeline1 = {
+                timeline: [iat_incongruent_instructions1, iat_incongruent_procedure1]
+            }
+
             var iat_incongruent_procedure2 = { 
             timeline:[iat_incongruent_training2],
             timeline_variables: incongruent_cues, 
             randomize_order: true, 
             repetitions: 1, }
 
+            var incongruent_timeline2 = {
+                timeline: [iat_incongruent_instructions2, iat_incongruent_procedure2]
+            }
+
             var incongruent = {
-                timeline: [iat_incongruent_procedure1, iat_incongruent_procedure2]
+                timeline: [incongruent_timeline1, incongruent_timeline2]
             }
 
             function shuffleArray(array) {
@@ -481,7 +561,7 @@ shuffleArray(incongruent.timeline);
         }
         
        var iat_timeline = {
-        timeline: [iat_valence_instructions, valence, iat_novel_instructions, novel, iat_congruent_instructions, congruent, iat_incongruent_instructions, incongruent] }
+        timeline: [valence, novel, congruent, incongruent] }
 
        var use = {
         type:jsPsychSurveyText,
@@ -653,6 +733,6 @@ var demo_instructions = {
        }
 
 
-       jsPsych.run([initial_instructions, training_plus_association, extensions, demographics, thank_you])
+       jsPsych.run([extensions])
     </script>
 </html>
