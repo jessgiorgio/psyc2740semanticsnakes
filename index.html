@@ -513,7 +513,10 @@ shuffleArray(congruent.timeline);
             right_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'incongruent_iat'
+                typeoftrial: 'incongruent_iat',
+                left_category_label: 'UNFAMILIAR/ GOOD',
+                right_category_label: 'FAMILIAR/BAD',
+                cue:jsPsych.timelineVariable("cue"),
             }
             
     
