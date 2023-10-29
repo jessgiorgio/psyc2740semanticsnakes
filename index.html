@@ -22,7 +22,7 @@
         <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
         <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
         <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
-        <script src="table.md"></script>
+        <link href="tablestyle.css" rel="stylesheet" type="text/css" />
     
     </head>
     <body></body>
@@ -168,16 +168,39 @@
         timeline: [training_procedure, association_instructions, association_procedure, after_association_instructions],
         repetitions: 3
     }
-    var iat_general_instructions = { 
-            type: jsPsychInstructions,
-            pages: [
-                "Next, you will use the 'A' and 'L' computer keys to categorize items into groups as fast as you can. These are the four groups and the items that belong to each.",
-                "table.md"
-                
-            ],
-            show_clickable_nav: true,
-            data: {
-                typeoftrial: 'instructions'} }
+    var iat_general_instructions = {
+    type: jsPsychInstructions,
+    pages: [
+        "<div class='instructions-container'>" +
+            "<p>Next, you will use the 'A' and 'L' computer keys to categorize items into groups as fast as you can. These are the four groups and the items that belong to each.</p>" +
+            "<table class='custom-table'>" +
+                "<tr>" +
+                    "<th>Category</th>" +
+                    "<th>Items</th>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td>Familiar pseudowords</td>" +
+                    "<td>Dodish, geck, foobly, mipp</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td>Unfamiliar pseudowords</td>" +
+                    "<td>Hepp, pimm, kiff, wibb</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td>Good words</td>" +
+                    "<td>Friendly, interesting, honest, funny</td>" +
+                    "</tr>" +
+                "<tr>" +
+                    "<td>Bad words</td>" +
+                    "<td>Cruel, boring, mean, uncomfortable</td>" +
+            "</table>" +
+        "</div>"
+    ],
+    show_clickable_nav: true,
+    data: {
+        typeoftrial: 'instructions'
+    }
+}
 
         var iat_valence_instructions1 = { 
             type: jsPsychInstructions,
@@ -204,7 +227,11 @@
             right_category_label: ['BAD'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'valence_iat'
+                typeoftrial: 'valence_iat',
+                left_category_label: 'GOOD',
+                right_category_label: 'BAD',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
             }}
 
             var iat_valence_instructions2 = { 
@@ -233,7 +260,11 @@
             right_category_label: ['GOOD'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'valence_iat'
+                typeoftrial: 'valence_iat',
+                left_category_label: 'BAD',
+                right_category_label: 'GOOD',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
             }
             
     }
@@ -299,7 +330,11 @@ shuffleArray(valence.timeline);
             right_category_label: ['UNFAMILIAR PSEUDOWORDS'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'novel_iat'
+                typeoftrial: 'novel_iat',
+                left_category_label: 'FAMILIAR',
+                right_category_label: 'UNFAMILIAR',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
             } 
         }
 
@@ -329,7 +364,11 @@ shuffleArray(valence.timeline);
             right_category_label: ['FAMILIAR PSEUDOWORDS'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'novel_iat'
+                typeoftrial: 'novel_iat',
+                left_category_label: 'UNFAMILIAR',
+                right_category_label: 'FAMILIAR',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
             }
            
     
@@ -377,6 +416,30 @@ shuffleArray(novel.timeline);
             data: {
                 typeoftrial: 'instructions'} }
 
+        var iat_congruent_practice1  = {
+            type: jsPsychIatHtml,
+            stimulus:jsPsych.timelineVariable("cue"),
+            key_to_move_forward: "ALL_KEYS",
+            stim_key_association: jsPsych.timelineVariable ("correct_key1"),
+            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
+            bottom_instructions: 'Please answer as quickly as possible.',
+            force_correct_key_press: true,
+            isplay_feedback: true,
+            trial_duration: 3000, //Only if display_feedback is false,
+            left_category_key: 'A',
+            right_category_key: 'L',
+            left_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
+            right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
+            response_ends_trial: true,
+            trials: 5, 
+            data: {
+                typeoftrial: 'practice',
+                left_category_label: 'FAMILIAR/GOOD',
+                right_category_label: 'UNFAMILIAR/BAD',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
+            } }
+
         var iat_congruent_training1  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
@@ -393,7 +456,11 @@ shuffleArray(novel.timeline);
             right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'congruent_iat'
+                typeoftrial: 'congruent_iat',
+                left_category_label: 'FAMILIAR/GOOD',
+                right_category_label: 'UNFAMILIAR/BAD',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
             }
             
     
@@ -404,6 +471,31 @@ shuffleArray(novel.timeline);
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
+
+        var iat_congruent_practice2  = {
+            type: jsPsychIatHtml,
+            stimulus:jsPsych.timelineVariable("cue"),
+            key_to_move_forward: "ALL_KEYS",
+            stim_key_association: jsPsych.timelineVariable ("correct_key2"),
+            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
+            bottom_instructions: 'Please answer as quickly as possible.',
+            force_correct_key_press: true,
+            display_feedback: true,
+            trial_duration: 3000, //Only if display_feedback is false,
+            left_category_key: 'A',
+            right_category_key: 'L',
+            left_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
+            right_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
+            response_ends_trial: true,
+            trials: 5, 
+            data: { typeoftrial: 'practice',
+                left_category_label: 'UNFAMILIAR/BAD',
+                right_category_label: 'FAMILIAR/GOOD',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
+            }
+            
+      }
 
       var iat_congruent_training2  = {
             type: jsPsychIatHtml,
@@ -420,14 +512,17 @@ shuffleArray(novel.timeline);
             left_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
             right_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
             response_ends_trial: true,
-            data: {
-                typeoftrial: 'congruent_iat'
+            data: { typeoftrial: 'congruent_iat',
+                left_category_label: 'UNFAMILIAR/BAD',
+                right_category_label: 'FAMILIAR/GOOD',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
             }
             
       }
 
             var iat_congruent_procedure1 = { 
-            timeline:[iat_congruent_training1],
+            timeline:[iat_congruent_practice1, iat_congruent_training1],
             timeline_variables: congruent_cues, 
             randomize_order: true, 
             repetitions: 1, }
@@ -437,7 +532,7 @@ shuffleArray(novel.timeline);
             }
 
             var iat_congruent_procedure2 = { 
-            timeline:[iat_congruent_training2],
+            timeline:[iat_congruent_practice2, iat_congruent_training2],
             timeline_variables: congruent_cues, 
             randomize_order: true, 
             repetitions: 1, }
@@ -484,7 +579,11 @@ shuffleArray(congruent.timeline);
             right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'GOOD'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'incongruent_iat'
+                typeoftrial: 'incongruent_iat',
+                left_category_label: 'FAMILIAR/BAD',
+                right_category_label: 'UNFAMILIAR/GOOD',
+                cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
             }
             
     
@@ -514,9 +613,10 @@ shuffleArray(congruent.timeline);
             response_ends_trial: true,
             data: {
                 typeoftrial: 'incongruent_iat',
-                left_category_label: 'UNFAMILIAR/ GOOD',
+                left_category_label: 'UNFAMILIAR/GOOD',
                 right_category_label: 'FAMILIAR/BAD',
                 cue:jsPsych.timelineVariable("cue"),
+                typeofword: jsPsych.timelineVariable("type_of_word")
             }
             
     
@@ -560,7 +660,8 @@ shuffleArray(incongruent.timeline);
         var use_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'Next you will write sentences using specific words.'
+                'Next you will write sentences using specific words.',
+                'Here is an example using the word <b>flower</b> in a sentence: I pick flowers in my garden.'
 
             ],
             show_clickable_nav: true,
@@ -569,7 +670,7 @@ shuffleArray(incongruent.timeline);
         }
         
        var iat_timeline = {
-        timeline: [valence, novel, congruent, incongruent] }
+        timeline: [iat_general_instructions, valence, novel, congruent, incongruent] }
 
        var use = {
         type:jsPsychSurveyText,
@@ -586,7 +687,7 @@ shuffleArray(incongruent.timeline);
         timeline: [use],
         timeline_variables: use_cues,
         randomize_order: true,
-        repetitions: 3
+        repetitions: 2
 
         
        }
@@ -741,6 +842,6 @@ var demo_instructions = {
        }
 
 
-       jsPsych.run([initial_instructions, use_instructions, iat_valence_instructions1, iat_valence_instructions2, iat_novel_instructions1, iat_novel_instructions2, iat_general_instructions, association_instructions])
+       jsPsych.run([congruent])
      </script>
 </html>
