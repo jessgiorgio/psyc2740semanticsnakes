@@ -31,12 +31,19 @@
 
        // jsPsych.data.displayData();
 }}) ;
+
+    var conditions = [1, 2, 3, 4];
+
+var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
+console.log("CONDITION=", CONDITION)
+
        
          var id = Math.floor(Math.random () * 10000000000);
          console.log("id =", id)
 
          jsPsych.data.addProperties({
-            ID: id
+            ID: id,
+            condition: CONDITION
          })
 
          var initial_instructions = { 
@@ -295,15 +302,6 @@
                 timeline: [valence_timeline1, valence_timeline2]
             }
 
-            function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
-shuffleArray(valence.timeline);
 
 
          var iat_novel_instructions1 = { 
@@ -399,15 +397,6 @@ shuffleArray(valence.timeline);
                 timeline: [novel_timeline1, novel_timeline2]
             }
 
-            function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
-shuffleArray(novel.timeline);
 
 
         var iat_congruent_instructions1 = { 
@@ -417,7 +406,8 @@ shuffleArray(novel.timeline);
             data: {
                 typeoftrial: 'instructions'} }
 
-        var iat_congruent_practice1  = {
+
+        var iat_congruent_training1  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
@@ -426,30 +416,6 @@ shuffleArray(novel.timeline);
             bottom_instructions: 'Please answer as quickly as possible.',
             force_correct_key_press: true,
             display_feedback: true,
-            trial_duration: 3000, //Only if display_feedback is false,
-            left_category_key: 'A',
-            right_category_key: 'L',
-            left_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
-            right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
-            response_ends_trial: true,
-            trials: 5,
-            data: {
-                typeoftrial: 'practice',
-                left_category_label: 'FAMILIAR/GOOD',
-                right_category_label: 'UNFAMILIAR/BAD',
-                cue:jsPsych.timelineVariable("cue"),
-                typeofword: jsPsych.timelineVariable("type_of_word")
-            } }
-
-        var iat_congruent_training1  = {
-            type: jsPsychIatHtml,
-            stimulus:jsPsych.timelineVariable("cue"),
-            key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVariable ("correct_key1"),
-            //html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            bottom_instructions: 'Please answer as quickly as possible.',
-            //force_correct_key_press: true,
-            //display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
@@ -473,7 +439,8 @@ shuffleArray(novel.timeline);
             data: {
                 typeoftrial: 'instructions'} }
 
-        var iat_congruent_practice2  = {
+
+      var iat_congruent_training2  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
@@ -482,31 +449,6 @@ shuffleArray(novel.timeline);
             bottom_instructions: 'Please answer as quickly as possible.',
             force_correct_key_press: true,
             display_feedback: true,
-            trial_duration: 3000, //Only if display_feedback is false,
-            left_category_key: 'A',
-            right_category_key: 'L',
-            left_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
-            right_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
-            response_ends_trial: true,
-            trials: 5, 
-            data: { typeoftrial: 'practice',
-                left_category_label: 'UNFAMILIAR/BAD',
-                right_category_label: 'FAMILIAR/GOOD',
-                cue:jsPsych.timelineVariable("cue"),
-                typeofword: jsPsych.timelineVariable("type_of_word")
-            }
-            
-      }
-
-      var iat_congruent_training2  = {
-            type: jsPsychIatHtml,
-            stimulus:jsPsych.timelineVariable("cue"),
-            key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVariable ("correct_key2"),
-            //html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            bottom_instructions: 'Please answer as quickly as possible.',
-            //force_correct_key_press: true,
-            //display_feedback: true,
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
@@ -521,11 +463,7 @@ shuffleArray(novel.timeline);
             }
             
       }
-            var con_practice_procedure1 = {
-            timeline:[iat_congruent_practice1],
-            timeline_variables: congruent_cues, 
-            randomize_order: true, 
-            repetitions: 1, }
+
 
             var iat_congruent_procedure1 = { 
             timeline:[iat_congruent_training1],
@@ -534,14 +472,9 @@ shuffleArray(novel.timeline);
             repetitions: 2, }
 
             var congruent_timeline1 = {
-                timeline: [iat_congruent_instructions1, con_practice_procedure1, iat_congruent_procedure1]
+                timeline: [iat_congruent_instructions1, iat_congruent_procedure1]
             }
 
-            var con_practice_procedure2 = {
-            timeline:[iat_congruent_practice2],
-            timeline_variables: congruent_cues, 
-            randomize_order: true, 
-            repetitions: 1, }
 
             var iat_congruent_procedure2 = { 
             timeline:[iat_congruent_training2],
@@ -550,22 +483,14 @@ shuffleArray(novel.timeline);
             repetitions: 2, }
 
             var congruent_timeline2 = {
-                timeline: [iat_congruent_instructions2, con_practice_procedure2, iat_congruent_procedure2]
+                timeline: [iat_congruent_instructions2, iat_congruent_procedure2]
             }
 
             var congruent = {
                 timeline: [congruent_timeline1, congruent_timeline2]
             }
 
-            function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
-shuffleArray(congruent.timeline);
+        
 
         var iat_incongruent_instructions1 = { 
             type: jsPsychInstructions,
@@ -575,7 +500,9 @@ shuffleArray(congruent.timeline);
             data: {
                 typeoftrial: 'instructions'}}
 
-            var iat_incongruent_practice1  = {
+            
+
+        var iat_incongruent_training1  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
@@ -584,32 +511,6 @@ shuffleArray(congruent.timeline);
             bottom_instructions: 'Please answer as quickly as possible.',
             force_correct_key_press: true,
             display_feedback: true,
-            trial_duration: 2000, //Only if display_feedback is false,
-            left_category_key: 'A',
-            right_category_key: 'L',
-            left_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
-            right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'GOOD'],
-            response_ends_trial: true,
-            data: {
-                typeoftrial: 'practice',
-                left_category_label: 'FAMILIAR/BAD',
-                right_category_label: 'UNFAMILIAR/GOOD',
-                cue:jsPsych.timelineVariable("cue"),
-                typeofword: jsPsych.timelineVariable("type_of_word")
-            }
-            
-    
-      }
-
-        var iat_incongruent_training1  = {
-            type: jsPsychIatHtml,
-            stimulus:jsPsych.timelineVariable("cue"),
-            key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVariable ("correct_key1"),
-            //html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            bottom_instructions: 'Please answer as quickly as possible.',
-            //force_correct_key_press: true,
-            //display_feedback: true,
             trial_duration: 2000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
@@ -635,7 +536,8 @@ shuffleArray(congruent.timeline);
                 typeoftrial: 'instructions'}}
 
         
-            var iat_incongruent_practice2  = {
+
+      var iat_incongruent_training2  = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
@@ -644,32 +546,6 @@ shuffleArray(congruent.timeline);
             bottom_instructions: 'Please answer as quickly as possible.',
             force_correct_key_press: true,
             display_feedback: true,
-            trial_duration: 2000, //Only if display_feedback is false,
-            left_category_key: 'A',
-            right_category_key: 'L',
-            left_category_label: ['UNFAMILIAR PSEUDOWORDS', 'GOOD'],
-            right_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
-            response_ends_trial: true,
-            data: {
-                typeoftrial: 'practice',
-                left_category_label: 'UNFAMILIAR/GOOD',
-                right_category_label: 'FAMILIAR/BAD',
-                cue:jsPsych.timelineVariable("cue"),
-                typeofword: jsPsych.timelineVariable("type_of_word")
-            }
-            
-    
-      }
-
-      var iat_incongruent_training2  = {
-            type: jsPsychIatHtml,
-            stimulus:jsPsych.timelineVariable("cue"),
-            key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVariable ("correct_key2"),
-            //html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            bottom_instructions: 'Please answer as quickly as possible.',
-            //force_correct_key_press: true,
-            //display_feedback: true,
             trial_duration: 2000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
@@ -686,11 +562,6 @@ shuffleArray(congruent.timeline);
             
     
       }
-      var incon_practice_procedure1 = { 
-            timeline:[iat_incongruent_practice1],
-            timeline_variables: incongruent_cues, 
-            randomize_order: true, 
-            repetitions: 1, }
 
 
        var iat_incongruent_procedure1 = { 
@@ -700,14 +571,10 @@ shuffleArray(congruent.timeline);
             repetitions: 2, }
 
             var incongruent_timeline1 = {
-                timeline: [iat_incongruent_instructions1, incon_practice_procedure1, iat_incongruent_procedure1]
+                timeline: [iat_incongruent_instructions1, iat_incongruent_procedure1]
             }
 
-            var incon_practice_procedure2 = { 
-            timeline:[iat_incongruent_practice2],
-            timeline_variables: incongruent_cues, 
-            randomize_order: true, 
-            repetitions: 1, }
+          
 
             var iat_incongruent_procedure2 = { 
             timeline:[iat_incongruent_training2],
@@ -716,22 +583,13 @@ shuffleArray(congruent.timeline);
             repetitions: 2, }
 
             var incongruent_timeline2 = {
-                timeline: [iat_incongruent_instructions2, incon_practice_procedure2, iat_incongruent_procedure2]
+                timeline: [iat_incongruent_instructions2, iat_incongruent_procedure2]
             }
 
             var incongruent = {
                 timeline: [incongruent_timeline1, incongruent_timeline2]
             }
 
-            function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
-shuffleArray(incongruent.timeline);
     
         var use_instructions = { 
             type: jsPsychInstructions,
@@ -785,15 +643,6 @@ var extensions = {
     timeline: [iat_timeline, use_timeline],
 };
 
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
-shuffleArray(extensions.timeline);
 
 
 var demo_instructions = {
@@ -928,7 +777,14 @@ var demo_instructions = {
        }
 
 
-       //jsPsych.run([congruent])
-       jsPsych.run([initial_instructions, training_plus_association, extensions, demographics, thank_you])
+       if(CONDITION == 1){
+jsPsych.run([])
+}
+
+else if (CONDITION == 2){}
+else if (CONDITION == 3){}
+else  {}
+
+       jsPsych.run([iat_timeline])
      </script>
 </html>
