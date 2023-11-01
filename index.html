@@ -152,25 +152,46 @@
         timeline: [association],
         timeline_variables: association_cues, 
         randomize_order: true,
-        repetitions: 3
+        repetitions: 1
     }
 
-    var after_association_instructions = { 
+    var after_association_instructions1 = { 
             type: jsPsychInstructions,
             pages: [
-                'You are now done with this set of training.<br><br> You will have 3 in total.<br><br> Press next to continue.'
+                'You have now completed 1/3 association trainings.<br><br> Press next to continue.'
     ],
             show_clickable_nav: true,
             data: {
-                typeoftrial: 'instructions'
+                typeoftrial: 'instructions1'
+         } }
+
+    var after_association_instructions2 = { 
+            type: jsPsychInstructions,
+            pages: [
+            'You have now completed 2/3 association trainings.<br><br> Press next to continue.'
+    ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions2'
+         } }
+
+    var after_association_instructions3 = { 
+            type: jsPsychInstructions,
+            pages: [
+            'You have completed 3/3 association trainings.<br><br> Press next to continue onto the rest of the experiment.'
+    ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions3'
          } }
 
     
 
     var training_plus_association = {
-        timeline: [training_procedure, association_instructions, association_procedure, after_association_instructions],
+        timeline: [training_procedure, association_instructions, association_procedure, after_association_instructions1, association_procedure, after_association_instructions2, association_procedure, after_association_instructions3],
         repetitions: 3
     }
+    
     var iat_general_instructions = {
     type: jsPsychInstructions,
     pages: [
@@ -178,24 +199,24 @@
             "<p>Next, you will use the 'A' and 'L' computer keys to categorize items into groups as fast as you can. These are the four groups and the items that belong to each.</p>" +
             "<table class='custom-table'>" +
                 "<tr>" +
-                    "<th>Category</th>" +
-                    "<th>Items</th>" +
+                    "<th>category</th>" +
+                    "<th>items</th>" +
                 "</tr>" +
                 "<tr>" +
-                    "<td>Familiar Pseudowords</td>" +
-                    "<td>Dodish, geck, foobly, mipp</td>" +
+                    "<td>familiar pseudowords</td>" +
+                    "<td>dodish, geck, foobly, mipp</td>" +
                 "</tr>" +
                 "<tr>" +
-                    "<td>Unfamiliar Pseudowords</td>" +
-                    "<td>Hepp, pimm, kiff, wibb</td>" +
+                    "<td>unfamiliar pseudowords</td>" +
+                    "<td>hepp, pimm, kiff, wibb</td>" +
                 "</tr>" +
                 "<tr>" +
-                    "<td>Good words</td>" +
-                    "<td>Friendly, sweet, honest, funny</td>" +
+                    "<td>good words</td>" +
+                    "<td>friendly, interesting, honest, funny</td>" +
                     "</tr>" +
                 "<tr>" +
-                    "<td>Bad words</td>" +
-                    "<td>Cruel, boring, mean, selfish</td>" +
+                    "<td>bad words</td>" +
+                    "<td>cruel, boring, mean, uncomfortable</td>" +
             "</table>" +
         "</div>"
     ],
