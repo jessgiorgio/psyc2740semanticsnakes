@@ -148,12 +148,9 @@
 
     } 
 
-    var association_procedure = {
-        timeline: [association],
-        timeline_variables: association_cues, 
-        randomize_order: true,
-        repetitions: 1
-    }
+   
+
+
 
     var after_association_instructions1 = { 
             type: jsPsychInstructions,
@@ -185,10 +182,29 @@
                 typeoftrial: 'instructions3'
          } }
 
+         var association_procedure1 = {
+            timeline: [training_procedure, association_instructions, association, after_association_instructions1],
+            timeline_variables: association_cues, 
+            randomize_order: true,
+            repetitions: 3
+        }
+        var association_procedure2 = {
+            timeline: [training_procedure, association_instructions, association, after_association_instructions2],
+            timeline_variables: association_cues, 
+            randomize_order: true,
+            repetitions: 3
+        }
+        var association_procedure3 = {
+            timeline: [training_procedure, association_instructions, association, after_association_instructions3],
+            timeline_variables: association_cues, 
+            randomize_order: true,
+            repetitions: 3
+    }
+
     
 
     var training_plus_association = {
-        timeline: [training_procedure, association_instructions, association_procedure, after_association_instructions1, association_procedure, after_association_instructions2, association_procedure, after_association_instructions3],
+        timeline: [association_procedure1, association_procedure2, association_procedure3],
         repetitions: 3
     }
     
