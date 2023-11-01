@@ -148,7 +148,11 @@ console.log("CONDITION=", CONDITION)
 
     } 
 
-   
+    var association_procedure = {
+        timeline: [association],
+        timeline_variables: association_cues, 
+        randomize_order: true,
+        repetitions: 3 }
 
 
 
@@ -182,31 +186,22 @@ console.log("CONDITION=", CONDITION)
                 typeoftrial: 'instructions3'
          } }
 
-         var association_procedure1 = {
-            timeline: [training_procedure, association_instructions, association, after_association_instructions1],
-            timeline_variables: association_cues, 
-            randomize_order: true,
-            repetitions: 3
-        }
-        var association_procedure2 = {
-            timeline: [training_procedure, association_instructions, association, after_association_instructions2],
-            timeline_variables: association_cues, 
-            randomize_order: true,
-            repetitions: 3
-        }
-        var association_procedure3 = {
-            timeline: [training_procedure, association_instructions, association, after_association_instructions3],
-            timeline_variables: association_cues, 
-            randomize_order: true,
-            repetitions: 3
+         var training_plus_association1 = {
+        timeline: [training_procedure, association_instructions, association_procedure, after_association_instructions1],
+        repetitions: 1
     }
+        var training_plus_association2 = {
+        timeline: [training_procedure, association_instructions, association_procedure, after_association_instructions2],
+        repetitions: 1 }
 
+        var training_plus_association3 = {
+        timeline: [training_procedure, association_instructions, association_procedure, after_association_instructions3],
+        repetitions: 1 }
+
+        var first_part = {
+            timeline: [training_plus_association1, training_plus_association2, training_plus_association3] }
+        
     
-
-    var training_plus_association = {
-        timeline: [association_procedure1, association_procedure2, association_procedure3],
-        repetitions: 3
-    }
     
     var iat_general_instructions = {
     type: jsPsychInstructions,
@@ -245,7 +240,7 @@ console.log("CONDITION=", CONDITION)
 var watch_out = {
     type: jsPsychInstructions,
             pages: [
-            'Watch out! The labels have changed position.'
+            'Watch out! The labels will change positions in the next trial.'
         ],
             show_clickable_nav: true,
             data: {
@@ -763,20 +758,12 @@ var demo_instructions = {
 
 
        if(CONDITION == 1){
-jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent, demographics, thank_you])
+jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent, demographics, thank_you])
 }
 
-<<<<<<< Updated upstream
-else if (CONDITION == 2){jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, novel_timeline1, congruent, demographics, thank_you])}
-else if (CONDITION == 3){jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline1, congruent, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
-else  {jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, novel_timeline1, congruent, use_timeline, demographics, thank_you])} //*
-     
-*/ jsPsych.run([training_plus_association])
-=======
-else if (CONDITION == 2){jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, demographics, thank_you])}
-else if (CONDITION == 3){jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
-else  {jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, use_timeline, demographics, thank_you])} 
->>>>>>> Stashed changes
+else if (CONDITION == 2){jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, demographics, thank_you])}
+else if (CONDITION == 3){jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
+else  {jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, use_timeline, demographics, thank_you])} 
 
      </script>
 </html>
