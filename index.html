@@ -49,11 +49,8 @@ console.log("CONDITION=", CONDITION)
          var initial_instructions = { 
             type: jsPsychInstructions,
             pages: [
-            'You have selected to take the Semantic Association Task.',
-            'Today you will be completing a series of exercises related to semantic cognition.',
-            'In the first task, you will read sentences with pseudowords (made-up words).',
-            'Please read them carefully. You will occasionally be presented with attention checks.',
-            'Press the spacebar after you have read each sentence.',
+            'You have selected to take the Semantic Association Task. <br><br> You will be completing a series of exercises related to semantic cognition.',
+            'In the first task, you will read sentences with pseudowords (made-up words).<br><br> Please read them carefully. You will occasionally be presented with attention checks. <br><br> Press the spacebar after you have read each sentence.',
             ],
             show_clickable_nav: true,
             data: {
@@ -161,9 +158,7 @@ console.log("CONDITION=", CONDITION)
     var after_association_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'You are now done with this set of training.',
-                'You will have 3 in total.',
-                'Press next to continue.'
+                'You are now done with this set of training.<br><br> You will have 3 in total.<br><br> Press next to continue.'
     ],
             show_clickable_nav: true,
             data: {
@@ -187,11 +182,11 @@ console.log("CONDITION=", CONDITION)
                     "<th>Items</th>" +
                 "</tr>" +
                 "<tr>" +
-                    "<td>Familiar pseudowords</td>" +
+                    "<td>Familiar Pseudowords</td>" +
                     "<td>Dodish, geck, foobly, mipp</td>" +
                 "</tr>" +
                 "<tr>" +
-                    "<td>Unfamiliar pseudowords</td>" +
+                    "<td>Unfamiliar Pseudowords</td>" +
                     "<td>Hepp, pimm, kiff, wibb</td>" +
                 "</tr>" +
                 "<tr>" +
@@ -294,7 +289,7 @@ console.log("CONDITION=", CONDITION)
         var iat_novel_instructions2 = { 
             type: jsPsychInstructions,
             pages: [
-                'Put a left finger on the <b>A</b> key for items that belong to the category <b>Unfamiliar pseudowords</b>. <br> Put a right finger on the <b>L</b> key for items that belong to the category <b>Familiar pseudowords</b>.</br><br>‘Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br> Press next when you are ready to start.'
+                'Put a left finger on the <b>A</b> key for items that belong to the category <b>Unfamiliar Pseudowords</b>. <br> Put a right finger on the <b>L</b> key for items that belong to the category <b>Familiar Pseudowords</b>.</br><br>Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br> Press next when you are ready to start.'
             ],
 
             show_clickable_nav: true,
@@ -351,7 +346,7 @@ console.log("CONDITION=", CONDITION)
 
         var iat_congruent_instructions1 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br><br></br>Go as fast as you can while being accurate.<br></br>Press next when you are ready to start.'],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Familiar Pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Unfamiliar Pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br><br></br>Go as fast as you can while being accurate.<br></br>Press next when you are ready to start.'],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -384,7 +379,7 @@ console.log("CONDITION=", CONDITION)
       }
       var iat_congruent_instructions2 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate. </br> Press next when you are ready to start.'],
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Familiar Pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Unfamiliar Pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate. </br> Press next when you are ready to start.'],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -443,7 +438,7 @@ console.log("CONDITION=", CONDITION)
 
         var iat_incongruent_instructions1 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br>Press next when you are ready to start.'
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar Pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar Pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br>Press next when you are ready to start.'
                 ],
             show_clickable_nav: true, 
             data: {
@@ -478,7 +473,7 @@ console.log("CONDITION=", CONDITION)
       }
       var iat_incongruent_instructions2 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar pseudowords</b> OR <b>Good</b> .<br> Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar pseudowords</b> OR <b>Bad</b>.</br><br>‘Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br> Press next when you are ready to start.'
+            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar Pseudowords</b> OR <b>Good</b> .<br> Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar Pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br> Press next when you are ready to start.'
             ],
             show_clickable_nav: true, 
             data: {
