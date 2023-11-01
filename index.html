@@ -32,10 +32,10 @@
        // jsPsych.data.displayData();
 }}) ;
 
-    var conditions = [1, 2, 3, 4];
+    //var conditions = [1, 2, 3, 4];
 
-var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
-console.log("CONDITION=", CONDITION)
+//var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
+//console.log("CONDITION=", CONDITION)
 
        
          var id = Math.floor(Math.random () * 10000000000);
@@ -43,7 +43,7 @@ console.log("CONDITION=", CONDITION)
 
          jsPsych.data.addProperties({
             ID: id,
-            condition: CONDITION
+            //condition: CONDITION
          })
 
          var initial_instructions = { 
@@ -191,11 +191,11 @@ console.log("CONDITION=", CONDITION)
                 "</tr>" +
                 "<tr>" +
                     "<td>Good words</td>" +
-                    "<td>Friendly, interesting, honest, funny</td>" +
+                    "<td>Friendly, sweet, honest, funny</td>" +
                     "</tr>" +
                 "<tr>" +
                     "<td>Bad words</td>" +
-                    "<td>Cruel, boring, mean, uncomfortable</td>" +
+                    "<td>Cruel, boring, mean, selfish</td>" +
             "</table>" +
         "</div>"
     ],
@@ -379,7 +379,7 @@ console.log("CONDITION=", CONDITION)
       }
       var iat_congruent_instructions2 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Familiar Pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Unfamiliar Pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate. </br> Press next when you are ready to start.'],
+            pages: ['This is a repeat of the last trial. Put a left finger on the <b>A</b> key for items that belong to the categories <b>Familiar Pseudowords</b> OR <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the categories <b>Unfamiliar Pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br><br>Go as fast as you can while being accurate. </br> Press next when you are ready to start.'],
             show_clickable_nav: true,
             data: {
                 typeoftrial: 'instructions'} }
@@ -473,7 +473,7 @@ console.log("CONDITION=", CONDITION)
       }
       var iat_incongruent_instructions2 = { 
             type: jsPsychInstructions,
-            pages: ['Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar Pseudowords</b> OR <b>Good</b> .<br> Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar Pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br> Press next when you are ready to start.'
+            pages: ['This is a repeat of the last trial. Put a left finger on the <b>A</b> key for items that belong to the categories <b>Unfamiliar Pseudowords</b> OR <b>Good</b> .<br> Put a right finger on the <b>L</b> key for items that belong to the categories <b>Familiar Pseudowords</b> OR <b>Bad</b>.</br><br>Items will appear one at a time.</br> Go as fast as you can while being accurate.<br></br> Press next when you are ready to start.'
             ],
             show_clickable_nav: true, 
             data: {
@@ -663,7 +663,7 @@ var demo_instructions = {
         var demo_lang = {
         type: jsPsychHtmlButtonResponse,
         stimulus: 'Is English your first language?',
-        choices: ['No', 'Yes'],
+        choices: ['Yes', 'No'],
         data: {
             typeoftrial: 'language',
         },
@@ -676,7 +676,7 @@ var demo_instructions = {
                 var last_trial_data = jsPsych.data.get().last(1).values()[0];
                 console.log("last_trial_data =", last_trial_data);
 
-                if (last_trial_data.response == 0) {
+                if (last_trial_data.response == 1) {
                     return true
                 } 
                 else {
@@ -715,13 +715,15 @@ var demo_instructions = {
        }
 
 
-       if(CONDITION == 1){
+       /* if(CONDITION == 1){
 jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, novel_timeline2, incongruent, demographics, thank_you])
 }
 
-else if (CONDITION == 2){jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, incongruent, novel_timeline2, congruent, demographics, thank_you])}
+else if (CONDITION == 2){jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, novel_timeline1, congruent, demographics, thank_you])}
 else if (CONDITION == 3){jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline1, congruent, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
-else  {jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline1, incongruent, novel_timeline2, congruent, use_timeline, demographics, thank_you])}
+else  {jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, novel_timeline1, congruent, use_timeline, demographics, thank_you])} //*
+     
+*/ jsPsych.run([demographics])
 
      </script>
 </html>
