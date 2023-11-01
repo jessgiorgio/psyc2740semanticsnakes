@@ -29,13 +29,13 @@
     <script>
         const jsPsych = initJsPsych ({on_finish: function(data){
 
-       // jsPsych.data.displayData();
+       //jsPsych.data.displayData();
 }}) ;
 
-    //var conditions = [1, 2, 3, 4];
+    var conditions = [1, 2, 3, 4];
 
-//var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
-//console.log("CONDITION=", CONDITION)
+var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
+console.log("CONDITION=", CONDITION)
 
        
          var id = Math.floor(Math.random () * 10000000000);
@@ -43,7 +43,7 @@
 
          jsPsych.data.addProperties({
             ID: id,
-            //condition: CONDITION
+            condition: CONDITION
          })
 
          var initial_instructions = { 
@@ -215,23 +215,23 @@
             "<p>Next, you will use the 'A' and 'L' computer keys to categorize items into groups as fast as you can. These are the four groups and the items that belong to each.</p>" +
             "<table class='custom-table'>" +
                 "<tr>" +
-                    "<th>category</th>" +
-                    "<th>items</th>" +
+                    "<th>Category</th>" +
+                    "<th>Items</th>" +
                 "</tr>" +
                 "<tr>" +
-                    "<td>familiar pseudowords</td>" +
+                    "<td>Familiar Pseudowords</td>" +
                     "<td>dodish, geck, foobly, mipp</td>" +
                 "</tr>" +
                 "<tr>" +
-                    "<td>unfamiliar pseudowords</td>" +
+                    "<td>Unfamiliar Pseudowords</td>" +
                     "<td>hepp, pimm, kiff, wibb</td>" +
                 "</tr>" +
                 "<tr>" +
-                    "<td>good words</td>" +
+                    "<td>Good Words</td>" +
                     "<td>friendly, interesting, honest, funny</td>" +
                     "</tr>" +
                 "<tr>" +
-                    "<td>bad words</td>" +
+                    "<td>Bad Words</td>" +
                     "<td>cruel, boring, mean, uncomfortable</td>" +
             "</table>" +
         "</div>"
@@ -241,6 +241,16 @@
         typeoftrial: 'instructions'
     }
 }
+
+var watch_out = {
+    type: jsPsychInstructions,
+            pages: [
+            'Watch out! The labels have changed position.'
+        ],
+            show_clickable_nav: true,
+            data: {
+                typeoftrial: 'instructions'} }
+
 
         var iat_valence_instructions = { 
             type: jsPsychInstructions,
@@ -752,15 +762,21 @@ var demo_instructions = {
        }
 
 
-       /* if(CONDITION == 1){
-jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, novel_timeline2, incongruent, demographics, thank_you])
+       if(CONDITION == 1){
+jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent, demographics, thank_you])
 }
 
+<<<<<<< Updated upstream
 else if (CONDITION == 2){jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, novel_timeline1, congruent, demographics, thank_you])}
 else if (CONDITION == 3){jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline1, congruent, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
 else  {jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, novel_timeline1, congruent, use_timeline, demographics, thank_you])} //*
      
 */ jsPsych.run([training_plus_association])
+=======
+else if (CONDITION == 2){jsPsych.run([initial_instructions, training_plus_association, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, demographics, thank_you])}
+else if (CONDITION == 3){jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
+else  {jsPsych.run([initial_instructions, training_plus_association, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, use_timeline, demographics, thank_you])} 
+>>>>>>> Stashed changes
 
      </script>
 </html>
