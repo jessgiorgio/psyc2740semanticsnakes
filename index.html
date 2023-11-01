@@ -210,7 +210,7 @@ console.log("CONDITION=", CONDITION)
     }
 }
 
-        var iat_valence_instructions1 = { 
+        var iat_valence_instructions = { 
             type: jsPsychInstructions,
             pages: [
                 'Put a left finger on the <b>A</b> key for items that belong to the category <b>Good</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the category <b>Bad</b>.</br><br>Items will appear one at a time.</br><br>If you make a mistake, a red X (bold and red) will appear. Press the other key to continue.</br><br>Go as fast as you can while being accurate.</br><br></br> Pres next when you are ready to start.'
@@ -219,11 +219,11 @@ console.log("CONDITION=", CONDITION)
             data: {
                 typeoftrial: 'instructions'} }
 
-       var iat_valence_training1  = {
+       var iat_valence_training = {
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: ['A', 'L'],
-            stim_key_association: jsPsych.timelineVariable ("correct_key1"),
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
             force_correct_key_press: true,
@@ -242,66 +242,21 @@ console.log("CONDITION=", CONDITION)
                 typeofword: jsPsych.timelineVariable("type_of_word")
             }}
 
-            var iat_valence_instructions2 = { 
-            type: jsPsychInstructions,
-            pages: [
-            'Put a left finger on the <b>A</b> key for items that belong to the category <b>Bad</b>.<br>Put a right finger on the <b>L</b> key for items that belong to the category <b>Good</b>.</br><br>Items will appear one at a time.</br><br>If you make a mistake, a red X (bold and red) will appear. Press the other key to continue.</br><br>Go as fast as you can while being accurate.</br><br></br>Press next when you are ready to start.'
-            ],
-            show_clickable_nav: true,
-            data: {
-                typeoftrial: 'instructions'} }
-
+        
             
-            var iat_valence_training2  = {
-            type: jsPsychIatHtml,
-            stimulus:jsPsych.timelineVariable("cue"),
-            key_to_move_forward: ['A', 'L'],
-            stim_key_association: jsPsych.timelineVariable ("correct_key2"),
-            html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
-            bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
-            force_correct_key_press: true,
-            display_feedback: true,
-            trial_duration: 3000, //Only if display_feedback is false,
-            left_category_key: 'A',
-            right_category_key: 'L',
-            left_category_label: ['BAD'],
-            right_category_label: ['GOOD'],
-            response_ends_trial: true,
-            data: {
-                typeoftrial: 'valence_iat',
-                left_category_label: 'BAD',
-                right_category_label: 'GOOD',
-                cue:jsPsych.timelineVariable("cue"),
-                typeofword: jsPsych.timelineVariable("type_of_word")
-            }
-            
-    }
+           
 
-            var iat_valence_procedure1 = { 
-            timeline:[iat_valence_training1],
+            var iat_valence_procedure = { 
+            timeline:[iat_valence_training],
             timeline_variables: valence_cues, 
             randomize_order: true, 
             repetitions: 1, }
 
-            var valence_timeline1 = {
-                timeline: [iat_valence_instructions1, iat_valence_procedure1]
+            var valence_timeline = {
+                timeline: [iat_valence_instructions, iat_valence_procedure]
             }
 
-            var iat_valence_procedure2 = { 
-            timeline:[iat_valence_training2],
-            timeline_variables: valence_cues, 
-            randomize_order: true, 
-            repetitions: 1, }
-
-            var valence_timeline2 = {
-                timeline: [iat_valence_instructions2, iat_valence_procedure2]
-            }
-
-
-            var valence = {
-                timeline: [valence_timeline1, valence_timeline2]
-            }
-
+        
 
          var iat_novel_instructions1 = { 
             type: jsPsychInstructions,
@@ -392,10 +347,6 @@ console.log("CONDITION=", CONDITION)
                 timeline: [iat_novel_instructions2, iat_novel_procedure2]
             }
 
-            var novel = {
-                timeline: [novel_timeline1, novel_timeline2]
-            }
-
 
 
         var iat_congruent_instructions1 = { 
@@ -410,7 +361,7 @@ console.log("CONDITION=", CONDITION)
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVariable ("correct_key1"),
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: 'Please answer as quickly as possible.',
             force_correct_key_press: true,
@@ -443,7 +394,7 @@ console.log("CONDITION=", CONDITION)
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVariable ("correct_key2"),
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: 'Please answer as quickly as possible.',
             force_correct_key_press: true,
@@ -451,12 +402,12 @@ console.log("CONDITION=", CONDITION)
             trial_duration: 3000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
-            right_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
+            left_category_label: ['FAMILIAR PSEUDOWORDS', 'GOOD'],
+            right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
             response_ends_trial: true,
             data: { typeoftrial: 'congruent_iat',
-                left_category_label: 'UNFAMILIAR/BAD',
-                right_category_label: 'FAMILIAR/GOOD',
+                left_category_label: 'FAMILIAR/GOOD',
+                right_category_label: 'UNFAMILIAR/BAD',
                 cue:jsPsych.timelineVariable("cue"),
                 typeofword: jsPsych.timelineVariable("type_of_word")
             }            
@@ -467,7 +418,7 @@ console.log("CONDITION=", CONDITION)
             timeline:[iat_congruent_training1],
             timeline_variables: congruent_cues, 
             randomize_order: true, 
-            repetitions: 2, }
+            repetitions: 1, }
 
             var congruent_timeline1 = {
                 timeline: [iat_congruent_instructions1, iat_congruent_procedure1]
@@ -478,7 +429,7 @@ console.log("CONDITION=", CONDITION)
             timeline:[iat_congruent_training2],
             timeline_variables: congruent_cues, 
             randomize_order: true, 
-            repetitions: 2, }
+            repetitions: 1, }
 
             var congruent_timeline2 = {
                 timeline: [iat_congruent_instructions2, iat_congruent_procedure2]
@@ -504,7 +455,7 @@ console.log("CONDITION=", CONDITION)
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVariable ("correct_key1"),
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: 'Please answer as quickly as possible.',
             force_correct_key_press: true,
@@ -512,13 +463,13 @@ console.log("CONDITION=", CONDITION)
             trial_duration: 2000, //Only if display_feedback is false,
             left_category_key: 'A',
             right_category_key: 'L',
-            left_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
-            right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'GOOD'],
+            left_category_label: ['UNFAMILIAR PSEUDOWORDS', 'GOOD'],
+            right_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
             response_ends_trial: true,
             data: {
                 typeoftrial: 'incongruent_iat',
-                left_category_label: 'FAMILIAR/BAD',
-                right_category_label: 'UNFAMILIAR/GOOD',
+                left_category_label: 'UNFAMILIAR/GOOD',
+                right_category_label: 'FAMILIAR/BAD',
                 cue:jsPsych.timelineVariable("cue"),
                 typeofword: jsPsych.timelineVariable("type_of_word")
             }
@@ -539,7 +490,7 @@ console.log("CONDITION=", CONDITION)
             type: jsPsychIatHtml,
             stimulus:jsPsych.timelineVariable("cue"),
             key_to_move_forward: "ALL_KEYS",
-            stim_key_association: jsPsych.timelineVariable ("correct_key2"),
+            stim_key_association: jsPsych.timelineVariable ("correct_key"),
             html_when_wrong:'<span style="color: red; font-size: 80px">X</span>',
             bottom_instructions: 'Please answer as quickly as possible.',
             force_correct_key_press: true,
@@ -566,7 +517,7 @@ console.log("CONDITION=", CONDITION)
             timeline:[iat_incongruent_training1],
             timeline_variables: incongruent_cues, 
             randomize_order: true, 
-            repetitions: 2, }
+            repetitions: 1, }
 
             var incongruent_timeline1 = {
                 timeline: [iat_incongruent_instructions1, iat_incongruent_procedure1]
@@ -578,7 +529,7 @@ console.log("CONDITION=", CONDITION)
             timeline:[iat_incongruent_training2],
             timeline_variables: incongruent_cues, 
             randomize_order: true, 
-            repetitions: 2, }
+            repetitions: 1, }
 
             var incongruent_timeline2 = {
                 timeline: [iat_incongruent_instructions2, iat_incongruent_procedure2]
@@ -601,8 +552,6 @@ console.log("CONDITION=", CONDITION)
                 typeoftrial: 'instructions'}
         }
         
-       var iat_timeline = {
-        timeline: [iat_general_instructions, valence, novel, congruent, incongruent] }
 
        var use = {
         type:jsPsychSurveyText,
@@ -636,10 +585,6 @@ console.log("CONDITION=", CONDITION)
        var use_timeline = {
         timeline: [use_instructions, use_procedure]
         }
-
-var extensions = {
-    timeline: [iat_timeline, use_timeline],
-};
 
 
 
@@ -776,13 +721,12 @@ var demo_instructions = {
 
 
        if(CONDITION == 1){
-jsPsych.run([])
+jsPsych.run([initial_instructions, training_plus_association, use_timeline, valence_timeline, novel_timeline1, congruent, novel_timeline2, incongruent, demographics, thank_you])
 }
 
-else if (CONDITION == 2){}
-else if (CONDITION == 3){}
-else  {}
+else if (CONDITION == 2){jsPsych.run([initial_instructions, training_plus_association, use_timeline, valence_timeline, novel_timeline1, incongruent, novel_timeline2, congruent, demographics, thank_you])}
+else if (CONDITION == 3){jsPsych.run([initial_instructions, training_plus_association, valence_timeline, novel_timeline1, congruent, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
+else  {jsPsych.run([initial_instructions, training_plus_association, valence_timeline, novel_timeline1, incongruent, novel_timeline2, congruent, use_timeline, demographics, thank_you])}
 
-       jsPsych.run([iat_timeline])
      </script>
 </html>
