@@ -770,14 +770,14 @@ var demo_instructions = {
             },
        }
 
-jsPsych.run([demographics])
-       //if(CONDITION == 1){
-//jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent, demographics, thank_you])
-//}
 
-//else if (CONDITION == 2){jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, demographics, thank_you])}
-//else if (CONDITION == 3){jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
-//else  {jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, use_timeline, demographics, thank_you])} 
+       if(CONDITION == 1){
+jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent, demographics, thank_you])
+}
+
+else if (CONDITION == 2){jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, demographics, thank_you])}
+else if (CONDITION == 3){jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
+else  {jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, use_timeline, demographics, thank_you])} 
 
      </script>
 </html>
