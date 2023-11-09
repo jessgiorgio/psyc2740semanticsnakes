@@ -646,7 +646,7 @@ var demo_instructions = {
         }
         }
 
-       var demo_survey = {
+       var demo_race = {
             type: jsPsychSurveyMultiSelect,
             questions: [
             {
@@ -655,14 +655,38 @@ var demo_instructions = {
             horizontal: true,
             required: true,
             name: 'race'
-            }, 
+            }],
+            data:{
+                typeoftrial: 'demo_race'
+            },
+
+            on_finish: function(data) {  
+                data.race = data.response.Q0;
+            }
+            
+        }
+        var demo_hand = {
+        type: jsPsychSurveyMultiChoice,
+        questions: [
             {
             prompt: "What is your dominant hand?", 
             options: ["Right", "Left", "Ambidextrous"], 
             horizontal: true,
             required: true,
             name: 'hand'
+            }],
+            data:{
+                typeoftrial: 'demo_hand'
             },
+
+            on_finish: function(data) {  
+                data.hand = data.response.Q0;
+            }}
+
+
+        var demo_time = {
+        type: jsPsychSurveyMultiChoice,
+        questions: [
             {
             prompt: "Please indicate what time of the day you feel most alert:", 
             options: ["Morning", "Afternoon", "Evening", "No differences"], 
@@ -671,13 +695,11 @@ var demo_instructions = {
             name: 'alert'
             }],
             data:{
-                typeoftrial: 'demopt2'
+                typeoftrial: 'demo_time'
             },
 
             on_finish: function(data) {  
-                data.race = data.response.Q0;
-                data.hand = data.response.Q1;
-                data.alert = data.response.Q2;
+                data.time = data.response.Q0;
             }
         }
 
@@ -737,7 +759,7 @@ var demo_instructions = {
     }
 
         var demographics= {
-                    timeline: [age_gender_educ_demo, demo_survey, language, other_info_demo]
+                    timeline: [age_gender_educ_demo, demo_race, demo_hand, demo_time, language, other_info_demo]
                 }
 
        var thank_you = {
@@ -748,14 +770,14 @@ var demo_instructions = {
             },
        }
 
+jsPsych.run([demographics])
+       //if(CONDITION == 1){
+//jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent, demographics, thank_you])
+//}
 
-       if(CONDITION == 1){
-jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent, demographics, thank_you])
-}
-
-else if (CONDITION == 2){jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, demographics, thank_you])}
-else if (CONDITION == 3){jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
-else  {jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, use_timeline, demographics, thank_you])} 
+//else if (CONDITION == 2){jsPsych.run([initial_instructions, first_part, use_timeline, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, demographics, thank_you])}
+//else if (CONDITION == 3){jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline1, congruent, watch_out, novel_timeline2, incongruent,  use_timeline, demographics, thank_you])}
+//else  {jsPsych.run([initial_instructions, first_part, iat_general_instructions, valence_timeline, novel_timeline2, incongruent, watch_out, novel_timeline1, congruent, use_timeline, demographics, thank_you])} 
 
      </script>
 </html>
