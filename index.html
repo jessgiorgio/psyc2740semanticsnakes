@@ -32,10 +32,10 @@
        //jsPsych.data.displayData();
 }}) ;
 
-    var conditions = [1, 2, 3, 4];
+    // conditions = [1, 2, 3, 4];
 
-var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
-console.log("CONDITION=", CONDITION)
+//var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
+//console.log("CONDITION=", CONDITION)
 
        
          var id = Math.floor(Math.random () * 10000000000);
@@ -404,7 +404,7 @@ var watch_out = {
             right_category_label: ['UNFAMILIAR PSEUDOWORDS', 'BAD'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'congruent_iat',
+                typeoftrial: 'practice',
                 left_category_label: 'FAMILIAR/GOOD',
                 right_category_label: 'UNFAMILIAR/BAD',
                 cue:jsPsych.timelineVariable("cue"),
@@ -497,7 +497,7 @@ var watch_out = {
             right_category_label: ['FAMILIAR PSEUDOWORDS', 'BAD'],
             response_ends_trial: true,
             data: {
-                typeoftrial: 'incongruent_iat',
+                typeoftrial: 'practice',
                 left_category_label: 'UNFAMILIAR/GOOD',
                 right_category_label: 'FAMILIAR/BAD',
                 cue:jsPsych.timelineVariable("cue"),
@@ -759,7 +759,11 @@ var demo_instructions = {
     }
 
         var demographics= {
+<<<<<<< Updated upstream
                     timeline: [age_gender_educ_demo, demo_race, demo_hand, demo_time, language, other_info_demo]
+=======
+                    timeline: [demo_instructions, age_gender_educ_demo, demo_survey, language, other_info_demo]
+>>>>>>> Stashed changes
                 }
 
        var thank_you = {
