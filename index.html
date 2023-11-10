@@ -136,7 +136,7 @@
 
     var association = {
         type:jsPsychSurveyText,
-        preamble: 'Type in the <b>first word</b> that comes to mind when you see the word below:',
+        preamble: 'Type in the <b>first word</b> that comes to mind when you see the word below. <br><br> Reminder: Your response MUST be a word you read about in the training session.',
         questions: [{prompt: jsPsych.timelineVariable('cue')}],
         trial_duration: 10, 
         data: {
@@ -646,7 +646,7 @@ var demo_instructions = {
         }
         }
 
-       var demo_race = {
+       var demo_survey = {
             type: jsPsychSurveyMultiSelect,
             questions: [
             {
@@ -655,38 +655,14 @@ var demo_instructions = {
             horizontal: true,
             required: true,
             name: 'race'
-            }],
-            data:{
-                typeoftrial: 'demo_race'
-            },
-
-            on_finish: function(data) {  
-                data.race = data.response.Q0;
-            }
-            
-        }
-        var demo_hand = {
-        type: jsPsychSurveyMultiChoice,
-        questions: [
+            }, 
             {
             prompt: "What is your dominant hand?", 
             options: ["Right", "Left", "Ambidextrous"], 
             horizontal: true,
             required: true,
             name: 'hand'
-            }],
-            data:{
-                typeoftrial: 'demo_hand'
             },
-
-            on_finish: function(data) {  
-                data.hand = data.response.Q0;
-            }}
-
-
-        var demo_time = {
-        type: jsPsychSurveyMultiChoice,
-        questions: [
             {
             prompt: "Please indicate what time of the day you feel most alert:", 
             options: ["Morning", "Afternoon", "Evening", "No differences"], 
@@ -695,11 +671,13 @@ var demo_instructions = {
             name: 'alert'
             }],
             data:{
-                typeoftrial: 'demo_time'
+                typeoftrial: 'demopt2'
             },
 
             on_finish: function(data) {  
-                data.time = data.response.Q0;
+                data.race = data.response.Q0;
+                data.hand = data.response.Q1;
+                data.alert = data.response.Q2;
             }
         }
 
@@ -759,11 +737,7 @@ var demo_instructions = {
     }
 
         var demographics= {
-<<<<<<< Updated upstream
-                    timeline: [age_gender_educ_demo, demo_race, demo_hand, demo_time, language, other_info_demo]
-=======
                     timeline: [demo_instructions, age_gender_educ_demo, demo_survey, language, other_info_demo]
->>>>>>> Stashed changes
                 }
 
        var thank_you = {
