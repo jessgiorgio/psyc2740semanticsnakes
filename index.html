@@ -29,13 +29,13 @@
     <script>
         const jsPsych = initJsPsych ({on_finish: function(data){
 
-       //jsPsych.data.displayData();
+      // jsPsych.data.displayData();
 }}) ;
 
-    conditions = [1, 2, 3, 4];
+    //conditions = [1, 2, 3, 4];
 
-var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
-console.log("CONDITION=", CONDITION)
+//var CONDITION = jsPsych.randomization.shuffle(conditions)[0];
+//console.log("CONDITION=", CONDITION)
 
        
          var id = Math.floor(Math.random () * 10000000000);
@@ -60,7 +60,7 @@ console.log("CONDITION=", CONDITION)
          var association_instructions = { 
             type: jsPsychInstructions,
             pages: [
-                'In this next segment, you will be asked to type in the <b>first word</b> that comes to your mind when you read a given word. <br><br> Keep in mind that you can only use the words you read about in the reading session.'
+            'In this next segment, you will be asked to type in the <b>first word</b> that comes to your mind when you read a given word. <br><br> Keep in mind that you can only use the words you read about in the reading session.'
             ],
             show_clickable_nav: true,
             data: {
@@ -646,10 +646,10 @@ var demo_instructions = {
         }
         }
 
-       var demo_race = {
+        var demo_race = {
             type: jsPsychSurveyMultiSelect,
             questions: [
-            {
+             {
             prompt: "Please select all the racial categories that apply to you:", 
             options: ["American Indian/Alaskan Native", "Asian", "Black/African American", "Native Hawaiian or Other Pacific Islander", "White/Caucasian", "More than once race", "Other"], 
             horizontal: true,
@@ -659,7 +659,6 @@ var demo_instructions = {
             data:{
                 typeoftrial: 'demo_race'
             },
-
             on_finish: function(data) {  
                 data.race = data.response.Q0;
             }
@@ -678,12 +677,9 @@ var demo_instructions = {
             data:{
                 typeoftrial: 'demo_hand'
             },
-
             on_finish: function(data) {  
                 data.hand = data.response.Q0;
             }}
-
-
         var demo_time = {
         type: jsPsychSurveyMultiChoice,
         questions: [
@@ -697,7 +693,6 @@ var demo_instructions = {
             data:{
                 typeoftrial: 'demo_time'
             },
-
             on_finish: function(data) {  
                 data.time = data.response.Q0;
             }
@@ -758,9 +753,10 @@ var demo_instructions = {
                 }
     }
 
-        var demographics= {
+    var demographics= {
                     timeline: [age_gender_educ_demo, demo_race, demo_hand, demo_time, language, other_info_demo]
                 }
+    
 
        var thank_you = {
         type: jsPsychHtmlKeyboardResponse,
