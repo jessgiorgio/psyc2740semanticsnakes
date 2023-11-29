@@ -15,8 +15,7 @@ library(dplyr)
 
 ```{r}
 descriptive = read.csv("sona11.28(updated).csv")%>%
-  mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct))%>%
-  mutate(rt=as.numeric(rt), correct=as.numeric(correct))
+  mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct))
 ```
 # attention trials data frame
 ```{r}
@@ -91,13 +90,35 @@ mean(association_type_occurrence$shared)
 
 ```
 
-#part we are stuck on
+#IAT accuracy by participant
 ```{r}
-subject_accuracy_iat <- descriptive %>%
+subset_data <- descriptive %>%
   filter(typeoftrial %in% c("congruent_iat", "incongruent_iat")) %>%
+  mutate(correct_numeric = ifelse(correct, 1, 0))
+
+subject_accuracy_iat <- subset_data %>%
   group_by(ID) %>%
-  summarize(mean_accuracy = mean(correct)) %>%
+  summarise(mean_accuracy = mean(correct_numeric)) %>%
+  ungroup() %>%
   select(ID, mean_accuracy)
+
+# Mean accuracy for 'congruent_iat' trials
+congruent_accuracy <- subset_data %>%
+  filter(typeoftrial == "congruent_iat") %>%
+  group_by(ID) %>%
+  summarise(mean_accuracy_congruent = mean(correct_numeric)) %>%
+  ungroup()
+
+# Mean accuracy for 'incongruent_iat' trials
+incongruent_accuracy <- subset_data %>%
+  filter(typeoftrial == "incongruent_iat") %>%
+  group_by(ID) %>%
+  summarise(mean_accuracy_incongruent = mean(correct_numeric)) %>%
+  ungroup()
+
+# Merge 
+subject_accuracy_iat <- left_join(subject_accuracy_iat, congruent_accuracy, by = "ID")
+subject_accuracy_iat <- left_join(subject_accuracy_iat, incongruent_accuracy, by = "ID")
 ```
 
 
