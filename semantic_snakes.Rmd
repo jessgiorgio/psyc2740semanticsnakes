@@ -227,9 +227,5 @@ summary(sentence_model)
 subject_attention_accuracy_filter <- subject_attention_accuracy %>%
   filter(mean_accuracy >= 0.75)
 ```
-
-# outlier 2: IAT accuracy
-```{r}
-
-```
+# outlier 2: see above in chunk 3
 
