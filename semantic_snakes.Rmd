@@ -216,7 +216,7 @@ sentence_scoring = descriptive %>%
 ```
 
 ```{r}
-sentence_model= lmer(AVERAGE_SENTENCE_SCORE ~ typeofword + (1 | ID),
+sentence_model= lmer(AVERAGE_SENTENCE_SCORE ~ real.or.novel + (1 | ID),
                   data = sentence_scoring)
 summary(sentence_model)
 ```
