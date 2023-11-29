@@ -7,7 +7,8 @@ date: "2023-11-21"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# load packages
+
+# INSTALL AND LOAD PACKAGES  
 ```{r}
 library(tidyverse)
 library(dplyr)
@@ -19,7 +20,7 @@ descriptive = read.csv("sona11.28(updated).csv")%>%
   mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct))
 ```
 
-# inspect data
+# INSPECT DATA
 ```{r}
 nrow(descriptive)
 ncol(descriptive)
@@ -29,6 +30,8 @@ descriptive %>% group_by(ID) %>% count()
 
 Independent variables: cue (foobly, dodish, geck, mipp), type of trial (congruent vs incongruent IAT), type of word (real vs novel)
 Dependent variables: correct, revised_correct, rt, AVERAGE SENTENCE SCORE
+
+#BASIC DESCRIPTIVES 
 
 # attention trials data frame
 ```{r}
@@ -232,6 +235,14 @@ ggplot() +
 ```
 This histogram reveals that incongruent trials tend to have a longer mean reaction time than congruent trials. 
 
+# outlier: under 75% attention accuracy - not sure where to incorporate this in yet?
+```{r}
+subject_attention_accuracy_filter <- subject_attention_accuracy %>%
+  filter(mean_accuracy >= 0.75)
+```
+
+# INFERENTIAL STATISTICS 
+
 # IAT RT inferential
 ```{r}
 IATrt_model= lmer(rt ~ typeoftrial + (1 | ID),
@@ -252,11 +263,4 @@ sentence_model= lmer(AVERAGE_SENTENCE_SCORE ~ real.or.novel + (1 | ID),
                   data = sentence_scoring)
 summary(sentence_model)
 ```
-
-# outlier 1: under 75% attention accuracy
-```{r}
-subject_attention_accuracy_filter <- subject_attention_accuracy %>%
-  filter(mean_accuracy >= 0.75)
-```
-# outlier 2: see above in chunk 3
 
