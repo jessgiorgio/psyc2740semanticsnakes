@@ -13,10 +13,11 @@ library(tidyverse)
 library(dplyr)
 library(lme4)
 ```
-
+# loading in data & removing outlier 2 of short or long rt on IAT trials
 ```{r}
 descriptive = read.csv("sona11.28(updated).csv")%>%
-  mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct))
+  mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct)) %>%
+  filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))
 ```
 # attention trials data frame
 ```{r}
@@ -219,5 +220,16 @@ sentence_scoring = descriptive %>%
 sentence_model= lmer(AVERAGE_SENTENCE_SCORE ~ real.or.novel + (1 | ID),
                   data = sentence_scoring)
 summary(sentence_model)
+```
+
+# outlier 1: under 75% attention accuracy
+```{r}
+subject_attention_accuracy_filter <- subject_attention_accuracy %>%
+  filter(mean_accuracy >= 0.75)
+```
+
+# outlier 2: IAT accuracy
+```{r}
+
 ```
 
