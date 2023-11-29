@@ -15,7 +15,8 @@ library(dplyr)
 
 ```{r}
 descriptive = read.csv("sona11.28(updated).csv")%>%
-  mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct))
+  mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct))%>%
+  mutate(rt=as.numeric(rt), correct=as.numeric(correct))
 ```
 # attention trials data frame
 ```{r}
@@ -90,6 +91,15 @@ mean(association_type_occurrence$shared)
 
 ```
 
+#part we are stuck on
+```{r}
+subject_accuracy_iat <- descriptive %>%
+  filter(typeoftrial %in% c("congruent_iat", "incongruent_iat")) %>%
+  group_by(ID) %>%
+  summarize(mean_accuracy = mean(correct)) %>%
+  select(ID, mean_accuracy)
+```
+
 
 # iat congruent by novel word
 ```{r}
@@ -97,7 +107,8 @@ iat_congruent_trials = descriptive %>%
   filter(typeoftrial == "congruent_iat", cue %in% c("dodish", "foobly", "geck", "mipp"))%>%
   group_by(cue)%>%
   mutate(rt=as.numeric(rt))%>%
-  summarize(mean_rt = mean(rt))
+  summarize(mean_rt = mean(rt))%>%
+  
 ```
 
 # iat incongruent by novel word
@@ -107,7 +118,7 @@ iat_incongruent = descriptive %>%
   group_by(cue)%>%
   mutate(rt=as.numeric(rt))%>%
   summarize(mean_rt = mean(rt))%>%
-  
+  filter(!ID %in% low_acc_IDs)
   
 ```
 #GRAPHHH????
@@ -166,6 +177,7 @@ ggplot(combined_data, aes(x = type_of_word, y = mean_rt, fill = trial_type)) +
        fill = "Trial Type") +
   theme_minimal()
 ```
+
 
 ```
 
