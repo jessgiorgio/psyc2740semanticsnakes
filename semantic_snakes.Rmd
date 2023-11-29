@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 library(dplyr)
+library(lme4)
 ```
 
 ```{r}
@@ -197,6 +198,13 @@ ggplot(combined_data, aes(x = type_of_word, y = mean_rt, fill = trial_type)) +
        y = "Mean Reaction Time",
        fill = "Trial Type") +
   theme_minimal()
+```
+
+# IAT RT inferential
+```{r}
+IATrt_model= lmer(rt ~ typeoftrial + (1 | ID),
+                  data = subset_data)
+summary(IATrt_model)
 ```
 
 
