@@ -207,6 +207,17 @@ IATrt_model= lmer(rt ~ typeoftrial + (1 | ID),
 summary(IATrt_model)
 ```
 
+# Use in sentence inferential
+```{r}
+sentence_scoring = descriptive %>%
+  filter(typeoftrial=="use_in_sentence") %>%
+  mutate(AVERAGE_SENTENCE_SCORE = as.numeric(AVERAGE_SENTENCE_SCORE))
 
+```
+
+```{r}
+sentence_model= lmer(AVERAGE_SENTENCE_SCORE ~ typeofword + (1 | ID),
+                  data = sentence_scoring)
+summary(sentence_model)
 ```
 
