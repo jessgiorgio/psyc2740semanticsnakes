@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE)
 # INSTALL AND LOAD PACKAGES  
 ```{r}
 library(tidyverse)
-library(dplyr)
 library(lme4)
 ```
 # loading in data 
@@ -49,62 +48,22 @@ subject_attention_accuracy = attention_trials %>%
   group_by(ID) %>%
   summarize(mean_accuracy = mean(revised_correct),
             sd_accuracy = sd(revised_correct))
+
+# outlier: under 75% attention accuracy - not sure where to incorporate this in yet?
+low_acc_IDs <- subject_attention_accuracy %>%
+  filter(mean_accuracy < 0.75) %>% pull(ID)
 ```
-#association
 
+# removing outliers 
 ```{r}
-scoring = read_csv("association_scoring.csv")%>%
-  arrange(cue, response)
-association_trials = descriptive %>%
-  filter(typeoftrial == "association") %>%
-  select (ID, revised_response, cue) %>%
-  rename(response = "revised_response") %>%
-  mutate(response = tolower(response)) %>%
-  left_join(scoring)
-
-# congruence trials
-
-congruence_trials = association_trials %>%
-  filter(!is.na(congruence)) %>%
-  filter(congruence %in% c("congruent", "incongruent")) %>%
-  filter(type_of_association %in% c("direct", "shared"))
-
-congruence_counts = congruence_trials %>%
-  group_by(ID, cue_type, congruence, type_of_association) %>%
-  count() %>%
-  group_by(ID, cue_type) %>%
-  mutate(proportion = n / sum(n))
-
-congruence_counts %>%
-  filter(congruence == "congruent") %>%
-  ungroup() %>%
-  summarise(mean_prop = mean(proportion))
-
-wide_counts = congruence_counts %>%
-  select(ID, cue_type, congruence, type_of_association, proportion) %>%
-  pivot_wider(names_from = congruence, values_from = proportion)%>%
-  mutate(incongruent = ifelse(is.na(incongruent), 0, incongruent),
-       congruent = ifelse(is.na(congruent), 0, congruent)) %>%
-  mutate(prop = congruent - incongruent)
-
-mean(wide_counts$prop)
-
-### counts by type of association 
-
-association_type_occurrence = wide_counts %>%
-  select(ID, cue_type, type_of_association, prop)%>%
-  pivot_wider(names_from = type_of_association, values_from = prop)%>%
-  mutate(shared = ifelse(is.na(shared), 0, shared),
-         direct = ifelse(is.na(direct), 0, direct))
-
-mean(association_type_occurrence$direct)
-mean(association_type_occurrence$shared)
-
+final_data = descriptive %>%
+  filter(!ID %in% low_acc_IDs) 
 ```
 
 #IAT accuracy by participant
 ```{r}
-subset_data <- descriptive %>%
+
+subset_data <- final_data %>%
   filter(typeoftrial %in% c("congruent_iat", "incongruent_iat")) %>%
    filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
   mutate(correct_numeric = ifelse(correct, 1, 0))
@@ -137,7 +96,7 @@ subject_accuracy_iat <- left_join(subject_accuracy_iat, incongruent_accuracy, by
 
 # iat congruent by novel word
 ```{r}
-iat_congruent_trials = descriptive %>%
+iat_congruent_trials = final_data %>%
   filter(typeoftrial == "congruent_iat", cue %in% c("dodish", "foobly", "geck", "mipp"))%>%
   filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
   group_by(cue)%>%
@@ -148,7 +107,7 @@ iat_congruent_trials = descriptive %>%
 
 # iat incongruent by novel word
 ```{r}
-iat_incongruent = descriptive %>%
+iat_incongruent = final_data %>%
   filter(typeoftrial == "incongruent_iat", cue %in% c("dodish", "foobly", "geck", "mipp"))%>%
    filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
   group_by(cue)%>%
@@ -177,7 +136,7 @@ ggplot(combined_data, aes(x = cue, y = mean_rt, fill = trial_type)) +
 This bar graph reveals a consistent relationship between all four of the novel words: incongruent trials have a higher reaction time than congruent trials. This seems to suggest the participants have a positive valence associated with these learned novel words.
 
 ```{r}
-novel_con = descriptive %>%
+novel_con = final_data %>%
   filter(typeoftrial == "congruent_iat", type_of_word %in% c("familiar novel", "unfamiliar novel"))%>%
    filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
   group_by(type_of_word)%>%
@@ -187,7 +146,7 @@ novel_con = descriptive %>%
 
 # iat incongruent by novel word
 ```{r}
-novel_incon = descriptive %>%
+novel_incon = final_data %>%
   filter(typeoftrial == "incongruent_iat", type_of_word %in% c("familiar novel", "unfamiliar novel"))%>%
    filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
   group_by(type_of_word)%>%
@@ -218,8 +177,8 @@ This bar graph seems to reveal that participants keep a consistent valence assoc
 
 library(ggplot2)
 
-congruent_data <- subset(descriptive, typeoftrial == "congruent_iat")
-incongruent_data <- subset(descriptive, typeoftrial == "incongruent_iat")
+congruent_data <- subset(final_data, typeoftrial == "congruent_iat")
+incongruent_data <- subset(final_data, typeoftrial == "incongruent_iat")
 
 ggplot() +
   geom_histogram(data = congruent_data, aes(x = rt, fill = typeoftrial), 
@@ -235,30 +194,24 @@ ggplot() +
 ```
 This histogram reveals that incongruent trials tend to have a longer mean reaction time than congruent trials. 
 
-# outlier: under 75% attention accuracy - not sure where to incorporate this in yet?
-```{r}
-subject_attention_accuracy_filter <- subject_attention_accuracy %>%
-  filter(mean_accuracy >= 0.75)
-```
+
 
 # INFERENTIAL STATISTICS 
 
 # IAT RT inferential
 ```{r}
-IATrt_model= lmer(rt ~ typeoftrial + (1 | ID),
+IATrt_model= lmerTest::lmer(rt ~ typeoftrial + (1 | ID),
                   data = subset_data)
 summary(IATrt_model)
+
 ```
 
 # Use in sentence inferential
 ```{r}
-sentence_scoring = descriptive %>%
+sentence_scoring = final_data %>%
   filter(typeoftrial=="use_in_sentence") %>%
   mutate(AVERAGE_SENTENCE_SCORE = as.numeric(AVERAGE_SENTENCE_SCORE))
 
-```
-
-```{r}
 sentence_model= lmer(AVERAGE_SENTENCE_SCORE ~ real.or.novel + (1 | ID),
                   data = sentence_scoring)
 summary(sentence_model)
