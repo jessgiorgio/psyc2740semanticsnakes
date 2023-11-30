@@ -589,7 +589,9 @@ var watch_out = {
             typeoftrial: 'use_in_sentence'
         },
         on_finish: function(data) {
-            data.response = data.response.Q0
+            data.response = data.response.Q0,
+            data.cue = jsPsych.timelineVariable('cue'),
+            data.real_or_novel = jsPsych.timelineVariable('real.or.novel')
                     }
        }
 
