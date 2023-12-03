@@ -101,7 +101,7 @@ filter(typeoftrial %in% c("incongruent_iat", "congruent_iat"),
 cue %in% c("dodish", "foobly", "geck", "mipp"))%>%
 group_by(typeoftrial,cue) %>%
 mutate(rt=as.numeric(rt))%>%
-summarize(mean_rt = mean(rt))
+summarize(mean_rt = mean(rt), sd_rt = sd(rt))
 
 ggplot(combined_data_1, aes(x = cue, y = mean_rt, fill = typeoftrial)) +
   geom_bar(stat = "identity", position = "dodge") +
@@ -109,7 +109,11 @@ ggplot(combined_data_1, aes(x = cue, y = mean_rt, fill = typeoftrial)) +
        x = "Cue",
        y = "Mean Reaction Time",
        fill = "Trial Type") +
-  theme_minimal()
+  theme_minimal()+
+  geom_errorbar(aes(ymin = mean_rt-sd_rt,
+                    ymax = mean_rt+sd_rt),
+                width= .25,
+                position = position_dodge(width=.9))
 
 ```
 This bar graph reveals a consistent relationship between all four of the novel words: incongruent trials have a higher reaction time than congruent trials. This seems to suggest the participants have a positive valence associated with these learned novel words.
@@ -122,15 +126,19 @@ filter(typeoftrial %in% c("incongruent_iat", "congruent_iat"),
 type_of_word %in% c("familiar novel", "unfamiliar novel"))%>%
 group_by(typeoftrial, type_of_word) %>%
 mutate(rt=as.numeric(rt))%>%
-summarize(mean_rt = mean(rt))
+summarize(mean_rt = mean(rt), sd_rt = sd(rt))
 
-ggplot(combined_data, aes(x = type_of_word, y = mean_rt, fill = trial_type)) +
+ggplot(combined_data_2, aes(x = type_of_word, y = mean_rt, fill = typeoftrial)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Mean Reaction Time for Type of Novel Word",
        x = "Cue",
        y = "Mean Reaction Time",
        fill = "Trial Type") +
-  theme_minimal()
+  theme_minimal()+
+  geom_errorbar(aes(ymin = mean_rt-sd_rt,
+                    ymax = mean_rt+sd_rt),
+                width= .25,
+                position = position_dodge(width=.9))
 ```
 This bar graph seems to reveal that participants keep a consistent valence associated with novel words. For both familiar and unfamiliar words, they have a longer mean reaction time on the incongruent trials. This shows that although a positive valence is paired with novel words, it is not a unique learned relationship, as it is repeated with new psuedo words.
 
