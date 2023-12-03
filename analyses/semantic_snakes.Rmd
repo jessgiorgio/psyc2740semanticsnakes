@@ -15,7 +15,7 @@ library(lme4)
 ```
 # loading in data 
 ```{r}
-descriptive = read.csv("sona11.28(updated).csv")%>%
+descriptive = read.csv("Dec_2_merged_data.csv")%>%
   mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct))
 ```
 
@@ -94,37 +94,16 @@ subject_accuracy_iat <- left_join(subject_accuracy_iat, incongruent_accuracy, by
 ```
 
 
-# iat congruent by novel word
+#Bar graph for IAT 4 novel words 
 ```{r}
-iat_congruent_trials = final_data %>%
-  filter(typeoftrial == "congruent_iat", cue %in% c("dodish", "foobly", "geck", "mipp"))%>%
-  filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
-  group_by(cue)%>%
-  mutate(rt=as.numeric(rt))%>%
-  summarize(mean_rt = mean(rt)) 
-  
-```
+combined_data_1 = subset_data %>%
+filter(typeoftrial %in% c("incongruent_iat", "congruent_iat"),
+cue %in% c("dodish", "foobly", "geck", "mipp"))%>%
+group_by(typeoftrial,cue) %>%
+mutate(rt=as.numeric(rt))%>%
+summarize(mean_rt = mean(rt))
 
-# iat incongruent by novel word
-```{r}
-iat_incongruent = final_data %>%
-  filter(typeoftrial == "incongruent_iat", cue %in% c("dodish", "foobly", "geck", "mipp"))%>%
-   filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
-  group_by(cue)%>%
-  mutate(rt=as.numeric(rt))%>%
-  summarize(mean_rt = mean(rt)) 
-  
-```
-
-#Bar graph for IAT 4 novel words
-```{r}
-
-combined_data <- bind_rows(
-  mutate(iat_congruent_trials, trial_type = "Congruent"),
-  mutate(iat_incongruent, trial_type = "Incongruent")
-)
-
-ggplot(combined_data, aes(x = cue, y = mean_rt, fill = trial_type)) +
+ggplot(combined_data_1, aes(x = cue, y = mean_rt, fill = typeoftrial)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Mean Reaction Time for Congruent and Incongruent Trials by Familiar Novel Word",
        x = "Cue",
@@ -135,32 +114,15 @@ ggplot(combined_data, aes(x = cue, y = mean_rt, fill = trial_type)) +
 ```
 This bar graph reveals a consistent relationship between all four of the novel words: incongruent trials have a higher reaction time than congruent trials. This seems to suggest the participants have a positive valence associated with these learned novel words.
 
-```{r}
-novel_con = final_data %>%
-  filter(typeoftrial == "congruent_iat", type_of_word %in% c("familiar novel", "unfamiliar novel"))%>%
-   filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
-  group_by(type_of_word)%>%
-  mutate(rt=as.numeric(rt))%>%
-  summarize(mean_rt = mean(rt))
-```
-
-# iat incongruent by novel word
-```{r}
-novel_incon = final_data %>%
-  filter(typeoftrial == "incongruent_iat", type_of_word %in% c("familiar novel", "unfamiliar novel"))%>%
-   filter(!(typeoftrial %in% c("congruent_iat", "incongruent_iat") & rt < 200 | rt > 1500))%>%
-  group_by(type_of_word)%>%
-  mutate(rt=as.numeric(rt))%>%
-  summarize(mean_rt = mean(rt))
-```
-
 # Bar graph for IAT familiar vs unfamiliar novel word
 ```{r}
 
-combined_data <- bind_rows(
-  mutate(novel_con, trial_type = "Congruent"),
-  mutate(novel_incon, trial_type = "Incongruent")
-)
+combined_data_2 = subset_data %>%
+filter(typeoftrial %in% c("incongruent_iat", "congruent_iat"),
+type_of_word %in% c("familiar novel", "unfamiliar novel"))%>%
+group_by(typeoftrial, type_of_word) %>%
+mutate(rt=as.numeric(rt))%>%
+summarize(mean_rt = mean(rt))
 
 ggplot(combined_data, aes(x = type_of_word, y = mean_rt, fill = trial_type)) +
   geom_bar(stat = "identity", position = "dodge") +
@@ -177,8 +139,8 @@ This bar graph seems to reveal that participants keep a consistent valence assoc
 
 library(ggplot2)
 
-congruent_data <- subset(final_data, typeoftrial == "congruent_iat")
-incongruent_data <- subset(final_data, typeoftrial == "incongruent_iat")
+congruent_data <- subset(subset_data, typeoftrial == "congruent_iat")
+incongruent_data <- subset(subset_data, typeoftrial == "incongruent_iat")
 
 ggplot() +
   geom_histogram(data = congruent_data, aes(x = rt, fill = typeoftrial), 
