@@ -1,1 +1,0 @@
-# psyc2740semanticsnakes
