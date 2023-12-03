@@ -93,6 +93,21 @@ subject_accuracy_iat <- left_join(subject_accuracy_iat, congruent_accuracy, by =
 subject_accuracy_iat <- left_join(subject_accuracy_iat, incongruent_accuracy, by = "ID")
 ```
 
+# helpful info
+```{r}
+nrow(subset_data)
+ncol(subset_data)
+subset_data%>% pull(ID) %>% unique() %>% length()
+subset_data %>% group_by(ID) %>% count()
+
+```
+
+```{r}
+result <- subset_data %>%
+  group_by(ID) %>%
+  summarize(unique_conditions = paste(unique(condition), collapse = ", "))
+```
+
 
 #Bar graph for IAT 4 novel words 
 ```{r}
