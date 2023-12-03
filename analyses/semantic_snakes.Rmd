@@ -69,10 +69,11 @@ subset_data <- final_data %>%
   mutate(correct_numeric = ifelse(correct, 1, 0))
 
 subject_accuracy_iat <- subset_data %>%
-  group_by(ID) %>%
-  summarise(mean_accuracy = mean(correct_numeric), sd_accuracy = sd(correct_numeric)) %>%
+  group_by(ID, condition) %>%
+  summarise(mean_accuracy = mean(correct_numeric),
+            sd_accuracy = sd(correct_numeric)) %>%
   ungroup() %>%
-  select(ID, mean_accuracy)
+  select(ID, condition, mean_accuracy, sd_accuracy)
 
 # Mean accuracy for 'congruent_iat' trials
 congruent_accuracy <- subset_data %>%
@@ -104,8 +105,12 @@ subset_data %>% group_by(ID) %>% count()
 
 ```{r}
 result <- subset_data %>%
-  group_by(ID) %>%
-  summarize(unique_conditions = paste(unique(condition), collapse = ", "))
+  group_by(ID, condition) %>%
+  summarise(mean_accuracy = mean(correct_numeric),
+            sd_accuracy = sd(correct_numeric)) %>%
+  group_by(condition) %>%
+  summarise(mean_accuracy = mean(mean_accuracy),
+            sd_accuracy = mean(sd_accuracy))
 ```
 
 
