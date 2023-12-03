@@ -15,7 +15,7 @@ library(lme4)
 ```
 # loading in data 
 ```{r}
-descriptive = read.csv("Dec_2_merged_data.csv")%>%
+descriptive = read.csv("UPDATEDfinaldata.csv")%>%
   mutate(rt=as.numeric(rt), revised_correct=as.numeric(revised_correct))
 ```
 
@@ -118,9 +118,12 @@ group_by(typeoftrial,cue) %>%
 mutate(rt=as.numeric(rt))%>%
 summarize(mean_rt = mean(rt), sd_rt = sd(rt))
 
+fill_colors <- c("incongruent_iat" = "dodgerblue", "congruent_iat" = "tomato")
+fill_labels <- c("incongruent_iat" = "Incongruent IAT", "congruent_iat" = "Congruent IAT")
+
 ggplot(combined_data_1, aes(x = cue, y = mean_rt, fill = typeoftrial)) +
   geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Mean Reaction Time for Congruent and Incongruent Trials by Familiar Novel Word",
+  labs(title = "Mean Reaction Time by Familiar Novel Word",
        x = "Cue",
        y = "Mean Reaction Time",
        fill = "Trial Type") +
@@ -128,7 +131,9 @@ ggplot(combined_data_1, aes(x = cue, y = mean_rt, fill = typeoftrial)) +
   geom_errorbar(aes(ymin = mean_rt-sd_rt,
                     ymax = mean_rt+sd_rt),
                 width= .25,
-                position = position_dodge(width=.9))
+                position = position_dodge(width=.9))+
+scale_fill_manual(values = fill_colors, labels = fill_labels) +  # Set custom fill colors and labels
+  theme_minimal()
 
 ```
 This bar graph reveals a consistent relationship between all four of the novel words: incongruent trials have a higher reaction time than congruent trials. This seems to suggest the participants have a positive valence associated with these learned novel words.
@@ -143,9 +148,12 @@ group_by(typeoftrial, type_of_word) %>%
 mutate(rt=as.numeric(rt))%>%
 summarize(mean_rt = mean(rt), sd_rt = sd(rt))
 
+fill_colors <- c("incongruent_iat" = "dodgerblue", "congruent_iat" = "tomato")
+fill_labels <- c("incongruent_iat" = "Incongruent IAT", "congruent_iat" = "Congruent IAT")
+
 ggplot(combined_data_2, aes(x = type_of_word, y = mean_rt, fill = typeoftrial)) +
   geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Mean Reaction Time for Type of Novel Word",
+  labs(title = "Mean Reaction Time by Type of Novel Word",
        x = "Cue",
        y = "Mean Reaction Time",
        fill = "Trial Type") +
@@ -153,7 +161,9 @@ ggplot(combined_data_2, aes(x = type_of_word, y = mean_rt, fill = typeoftrial)) 
   geom_errorbar(aes(ymin = mean_rt-sd_rt,
                     ymax = mean_rt+sd_rt),
                 width= .25,
-                position = position_dodge(width=.9))
+                position = position_dodge(width=.9))+
+scale_fill_manual(values = fill_colors, labels = fill_labels) +  # Set custom fill colors and labels
+  theme_minimal()
 ```
 This bar graph seems to reveal that participants keep a consistent valence associated with novel words. For both familiar and unfamiliar words, they have a longer mean reaction time on the incongruent trials. This shows that although a positive valence is paired with novel words, it is not a unique learned relationship, as it is repeated with new psuedo words.
 
