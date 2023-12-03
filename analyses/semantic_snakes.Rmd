@@ -123,7 +123,7 @@ group_by(typeoftrial,cue) %>%
 mutate(rt=as.numeric(rt))%>%
 summarize(mean_rt = mean(rt), sd_rt = sd(rt))
 
-fill_colors <- c("incongruent_iat" = "dodgerblue", "congruent_iat" = "tomato")
+fill_colors <- c("incongruent_iat" = "darkorchid1", "congruent_iat" = "lightgreen")
 fill_labels <- c("incongruent_iat" = "Incongruent IAT", "congruent_iat" = "Congruent IAT")
 
 ggplot(combined_data_1, aes(x = cue, y = mean_rt, fill = typeoftrial)) +
@@ -153,7 +153,7 @@ group_by(typeoftrial, type_of_word) %>%
 mutate(rt=as.numeric(rt))%>%
 summarize(mean_rt = mean(rt), sd_rt = sd(rt))
 
-fill_colors <- c("incongruent_iat" = "dodgerblue", "congruent_iat" = "tomato")
+fill_colors <- c("incongruent_iat" = "darkorchid1", "congruent_iat" = "lightgreen")
 fill_labels <- c("incongruent_iat" = "Incongruent IAT", "congruent_iat" = "Congruent IAT")
 
 ggplot(combined_data_2, aes(x = type_of_word, y = mean_rt, fill = typeoftrial)) +
@@ -181,15 +181,18 @@ congruent_data <- subset(subset_data, typeoftrial == "congruent_iat")
 incongruent_data <- subset(subset_data, typeoftrial == "incongruent_iat")
 
 ggplot() +
-  geom_histogram(data = congruent_data, aes(x = rt, fill = typeoftrial), 
-                 binwidth = 50, color = "pink", alpha = 0.7, position = "identity") +
-  geom_histogram(data = incongruent_data, aes(x = rt, fill = typeoftrial), 
-                 binwidth = 50, color = "blue", alpha = 0.7, position = "identity") +
+  geom_histogram(data = congruent_data, aes(x = rt, fill = "Congruent"),
+                 binwidth = 50, color = "darkorchid1", alpha = 0.7, position = "identity") +
+  geom_histogram(data = incongruent_data, aes(x = rt, fill = "Incongruent"),
+                 binwidth = 50, color = "lightgreen", alpha = 0.7, position = "identity") +
   labs(title = "Reaction Times - Congruent vs Incongruent Trials",
        x = "Reaction Time",
        y = "Frequency",
        fill = "Trial Type") +
+  scale_fill_manual(values = c("Congruent" = "darkorchid1", "Incongruent" = "lightgreen")) +
   theme_minimal()
+
+
 
 ```
 This histogram reveals that incongruent trials tend to have a longer mean reaction time than congruent trials. 
@@ -228,11 +231,14 @@ summary(sentence_model)
 mean_sentence_score <- mean(sentence_scoring$avg_data, na.rm = TRUE)
 print(mean_sentence_score)
 
-# Histogram of individual scores
 hist(sentence_scoring$avg_data, 
-     main = "Histogram of Individual Sentence Scores",
+     col = "darkorchid1",  # Set the color to purple
+     main = "Scoring Application of Novel Words",
      xlab = "Sentence Scores",
-     ylab = "Frequency")
+     ylab = "Frequency",
+     font.main = 1)  # 1 indicates normal text
+
+
 
 ```
 mean = 0.27
