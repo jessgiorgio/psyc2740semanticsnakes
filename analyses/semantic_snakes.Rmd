@@ -94,6 +94,19 @@ subject_accuracy_iat <- left_join(subject_accuracy_iat, congruent_accuracy, by =
 subject_accuracy_iat <- left_join(subject_accuracy_iat, incongruent_accuracy, by = "ID")
 ```
 
+```{r}
+average_mean_accuracy <- subject_accuracy_iat %>%
+  summarise(
+    avg_mean_accuracy_congruent = mean(mean_accuracy_congruent, na.rm = TRUE),
+    avg_mean_accuracy_incongruent = mean(mean_accuracy_incongruent, na.rm = TRUE),
+    sd_mean_accuracy_congruent = sd(mean_accuracy_congruent, na.rm = TRUE),
+    sd_mean_accuracy_incongruent = sd(mean_accuracy_incongruent, na.rm = TRUE)
+  )
+
+# View the average mean accuracy and standard deviation for congruent and incongruent trials
+average_mean_accuracy
+```
+
 # helpful info
 ```{r}
 nrow(subset_data)
@@ -208,6 +221,9 @@ summary(IATrt_model)
 
 # Use in sentence inferential
 ```{r}
+library(dplyr)
+library(lme4)
+
 sentence_scoring <- final_data %>%
   filter(typeoftrial == "use_in_sentence") %>%
   mutate_at(vars(jess_sentence_score, jenn_sentence_score, dyana_sentence_score), as.numeric) %>%
@@ -222,7 +238,12 @@ unique(sentence_scoring$real.or.novel)
 # If 'real.or.novel' isn't a factor or has only one level, convert it to a factor with appropriate levels
 sentence_scoring$real.or.novel <- factor(sentence_scoring$real.or.novel, levels = c("r", "n"))
 
-sentence_model <- lmer(avg_data ~ real.or.novel + (1 | ID),
+# Set 'r' words to have a score of 1 in a new column 'adjusted_score'
+sentence_scoring <- sentence_scoring %>%
+  mutate(adjusted_score = ifelse(real.or.novel == "r", 1, avg_data))
+
+# Fit the model using 'adjusted_score' instead of 'avg_data'
+sentence_model <- lmer(adjusted_score ~ real.or.novel + (1 | ID),
                        data = sentence_scoring)
 summary(sentence_model)
 
