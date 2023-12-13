@@ -119,22 +119,38 @@ result <- subset_data %>%
 combined_data_1 = subset_data %>%
 filter(typeoftrial %in% c("incongruent_iat", "congruent_iat"),
 cue %in% c("dodish", "foobly", "geck", "mipp"))%>%
-group_by(typeoftrial,cue) %>%
-mutate(rt=as.numeric(rt))%>%
-summarize(mean_rt = mean(rt), sd_rt = sd(rt))
+  mutate(rt=as.numeric(rt))
+
+subject_means_1 = combined_data_1%>%
+  group_by(ID, typeoftrial, cue)%>%
+  summarize(mean_rt = mean(rt), sd_rt = sd(rt))
+
+counts1 = subject_means_1%>%
+group_by(typeoftrial, cue) %>%
+  count()
+
+
+mean_reactions_overall_1 = combined_data_1%>%
+  group_by(typeoftrial, cue)%>%
+  summarize(mean_rt = mean(rt), sd_rt = sd(rt)) %>%
+  left_join(counts1)%>%
+  mutate(SE = sd_rt/n,
+         ymin = mean_rt - 1.96*SE,
+         ymax = mean_rt + 1.96*SE)
+
 
 fill_colors <- c("incongruent_iat" = "darkorchid1", "congruent_iat" = "lightgreen")
 fill_labels <- c("incongruent_iat" = "Incongruent IAT", "congruent_iat" = "Congruent IAT")
 
-ggplot(combined_data_1, aes(x = cue, y = mean_rt, fill = typeoftrial)) +
+ggplot(mean_reactions_overall_1, aes(x = cue, y = mean_rt, fill = typeoftrial)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Mean Reaction Time by Familiar Novel Word",
        x = "Cue",
        y = "Mean Reaction Time",
        fill = "Trial Type") +
   theme_minimal()+
-  geom_errorbar(aes(ymin = mean_rt-sd_rt,
-                    ymax = mean_rt+sd_rt),
+  geom_errorbar(aes(ymin = ymin,
+                    ymax = ymax),
                 width= .25,
                 position = position_dodge(width=.9))+
 scale_fill_manual(values = fill_colors, labels = fill_labels) +  # Set custom fill colors and labels
@@ -148,23 +164,37 @@ This bar graph reveals a consistent relationship between all four of the novel w
 
 combined_data_2 = subset_data %>%
 filter(typeoftrial %in% c("incongruent_iat", "congruent_iat"),
-type_of_word %in% c("familiar novel", "unfamiliar novel"))%>%
+type_of_word %in% c("familiar novel", "unfamiliar novel")) %>%
+  mutate(rt=as.numeric(rt))
+
+subject_means = combined_data_2%>%
+  group_by(ID, typeoftrial, type_of_word)%>%
+  summarize(mean_rt = mean(rt), sd_rt = sd(rt))
+
+counts = subject_means%>%
 group_by(typeoftrial, type_of_word) %>%
-mutate(rt=as.numeric(rt))%>%
-summarize(mean_rt = mean(rt), sd_rt = sd(rt))
+  count()
+
+mean_reactions_overall = combined_data_2%>%
+  group_by(typeoftrial, type_of_word)%>%
+  summarize(mean_rt = mean(rt), sd_rt = sd(rt)) %>%
+  left_join(counts)%>%
+  mutate(SE = sd_rt/n,
+         ymin = mean_rt - 1.96*SE,
+         ymax = mean_rt + 1.96*SE)
 
 fill_colors <- c("incongruent_iat" = "darkorchid1", "congruent_iat" = "lightgreen")
 fill_labels <- c("incongruent_iat" = "Incongruent IAT", "congruent_iat" = "Congruent IAT")
 
-ggplot(combined_data_2, aes(x = type_of_word, y = mean_rt, fill = typeoftrial)) +
+ggplot(mean_reactions_overall, aes(x = type_of_word, y = mean_rt, fill = typeoftrial)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Mean Reaction Time by Type of Novel Word",
        x = "Cue",
        y = "Mean Reaction Time",
        fill = "Trial Type") +
   theme_minimal()+
-  geom_errorbar(aes(ymin = mean_rt-sd_rt,
-                    ymax = mean_rt+sd_rt),
+  geom_errorbar(aes(ymin = ymin,
+                    ymax = ymax),
                 width= .25,
                 position = position_dodge(width=.9))+
 scale_fill_manual(values = fill_colors, labels = fill_labels) +  # Set custom fill colors and labels
